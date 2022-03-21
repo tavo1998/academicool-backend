@@ -1,0 +1,29 @@
+{
+  "name": "academicool-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tavo1998/academicool-backend.git"
+  },
+  "keywords": [],
+  "author": "Gustavo Pinto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tavo1998/academicool-backend/issues"
+  },
+  "homepage": "https://github.com/tavo1998/academicool-backend#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.22",
+    "prisma": "^3.11.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  }
+}
