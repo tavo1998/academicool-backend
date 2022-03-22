@@ -1,13 +1,10 @@
-import express, { Request, Response } from "express"
+import express from "express"
+import authRouter from "./routers/auth";
 
 const app = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: "Hello"
-  })
-})
+app.use("/auth", authRouter);
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server running")
 })
