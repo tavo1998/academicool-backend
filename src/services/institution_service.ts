@@ -22,3 +22,32 @@ export async function createInstitution(data: Institution) {
     throw e;
   }
 }
+
+export async function updateInstiution(id: number, data: Institution){
+  try {
+    const updatedInstitution = await prisma.institution.update({
+      where: {
+        id: id
+      },
+      data: data
+    })
+    return updatedInstitution;
+  }catch(e) {
+    console.log(e)
+    throw e;
+  }
+}
+
+export async function deleteInstitution(id: number) {
+  try {
+    const deletedUser = await prisma.institution.delete({
+      where: {
+        id
+      }
+    })
+    return deletedUser;
+  }catch(e) {
+    console.log(e);
+    throw e;
+  }
+}
