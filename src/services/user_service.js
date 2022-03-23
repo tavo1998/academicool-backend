@@ -2,7 +2,7 @@ const prisma =  require("../config/database");
 
 async function checkUserRegister(email) {
   const user = await getUserByEmail(email)
-  if(!user) return false;
+  return user;
 }
 
 async function getUserByEmail(email) {
