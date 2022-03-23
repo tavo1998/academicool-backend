@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getConnectionUrl, getGoogleTokens, getUserDetails } from "../../lib/google";
 import { createJWT } from "../../lib/jwt";
 import { createOptionsCookie } from "../../lib/cookies";
+import { checkUserRegister } from "./../../services/user_service";
  
 function googleLogin(req: Request, res: Response) {
   return res.redirect(getConnectionUrl());
@@ -12,6 +13,9 @@ async function googleCallback(req: Request, res: Response) {
   try {
     const tokens = await getGoogleTokens(code)
     const userInfo = await getUserDetails(tokens)
+    if(!checkUserRegister(userInfo.email as string)){
+      return res.redirect("/")
+    }
     const jwt = createJWT({ user_id: 5 });
     res.cookie("user_auth_token", jwt, createOptionsCookie(1));
     return res.redirect("/")
