@@ -1,7 +1,6 @@
-import { Institution } from "@prisma/client";
-import prisma from "./../config/database";
+const prisma = require("../config/database");
 
-export async function getInstitutions() {
+async function getInstitutions() {
   try {
     const institutions = await prisma.institution.findMany()
     return institutions
@@ -11,7 +10,7 @@ export async function getInstitutions() {
   }
 }
 
-export async function createInstitution(data: Institution) {
+async function createInstitution(data) {
   try {
     const institution = await prisma.institution.create({
       data: data
@@ -23,7 +22,7 @@ export async function createInstitution(data: Institution) {
   }
 }
 
-export async function updateInstiution(id: number, data: Institution){
+async function updateInstiution(id, data){
   try {
     const updatedInstitution = await prisma.institution.update({
       where: {
@@ -38,7 +37,7 @@ export async function updateInstiution(id: number, data: Institution){
   }
 }
 
-export async function deleteInstitution(id: number) {
+async function deleteInstitution(id) {
   try {
     const deletedUser = await prisma.institution.delete({
       where: {
@@ -50,4 +49,11 @@ export async function deleteInstitution(id: number) {
     console.log(e);
     throw e;
   }
+}
+
+module.exports = {
+  getInstitutions,
+  createInstitution,
+  updateInstiution,
+  deleteInstitution
 }
