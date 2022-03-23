@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Institution {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
+  mision String? @db.VarChar(280)
+  vision String? @db.VarChar(280)
+  address String @db.VarChar(100)
+  users User[]
+  subjects Subject[]
+  students Student[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  identification_id String @db.VarChar(50) @unique
+  first_name String @db.VarChar(50)
+  last_name String @db.VarChar(50)
+  email String @db.VarChar(100) @unique
+  phone_number String @db.VarChar(50)
+  address String @db.VarChar(100)
+  gender String @db.VarChar(50)
+  subjects Subject[]
+  students Student[]
+  role Role
+  institution Institution @relation(fields: [institution_id], references: [id])
+  institution_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Grade {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(50)
+  subjects Subject[]
+  students Student[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Subject {
+  id Int @id @default(autoincrement())
+  description String @db.VarChar(280)
+  subject_date DateTime @db.Date
+  institution Institution @relation(fields: [institution_id], references: [id])
+  institution_id Int
+  teacher User @relation(fields: [teacher_id], references: [id])
+  teacher_id Int
+  grade Grade @relation(fields: [grade_id], references: [id])
+  grade_id Int
+  assistance Assistance[]
+  notices Notice[]
+  enrollments Enrollment[]
+  assigments Assigment[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Student {
+  id Int @id @default(autoincrement())
+  identification_id String @db.VarChar(50) @unique
+  first_name String @db.VarChar(50)
+  last_name String @db.VarChar(50)
+  email String @db.VarChar(100) @unique
+  phone_number String @db.VarChar(50)
+  address String @db.VarChar(100)
+  institution Institution @relation(fields: [institution_id], references: [id])
+  institution_id Int
+  attendant User @relation(fields: [attendant_id], references: [id])
+  attendant_id Int
+  grade Grade @relation(fields: [grade_id], references: [id])
+  grade_id Int
+  assistance Assistance[]
+  enrollments Enrollment[]
+  scores Score[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Assistance {
+  student Student @relation(fields: [student_id], references: [id])
+  student_id Int
+  subject Subject @relation(fields: [subject_id], references: [id])
+  subject_id Int
+  date DateTime @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([student_id, subject_id])
+}
+
+model Notice {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(100)
+  description String @db.VarChar(280)
+  subject Subject @relation(fields: [subject_id], references: [id])
+  subject_id Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Enrollment {
+  subject Subject @relation(fields: [subject_id], references: [id])
+  subject_id Int
+  student Student @relation(fields: [student_id], references: [id])
+  student_id Int
+  enrollment_date DateTime @default(now())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([subject_id, student_id])
+}
+
+model AssigmentType {
+  id Int @id @default(autoincrement())
+  name String @db.VarChar(50)
+  percentage Int
+  assigments Assigment[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Assigment {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(100)
+  description String @db.VarChar(280)
+  assigment_type AssigmentType @relation(fields: [assigment_type_id], references: [id])
+  assigment_type_id Int
+  subject Subject @relation(fields: [subject_id], references: [id])
+  subject_id Int
+  scores Score[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt   
+}
+
+model Score {
+  assigment Assigment @relation(fields: [assigment_id], references: [id])
+  assigment_id Int
+  student Student @relation(fields: [student_id], references: [id])
+  student_id Int
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  @@id([assigment_id, student_id])
+}
+
+enum Role {
+  ATTENDANT
+  TEACHER
+  ADMIN
+}
