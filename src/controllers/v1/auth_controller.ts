@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { getConnectionUrl, getGoogleTokens, getUserDetails } from "./../lib/google";
-import { createJWT } from "./../lib/jwt";
-import { createOptionsCookie } from "./../lib/cookies";
+import { getConnectionUrl, getGoogleTokens, getUserDetails } from "../../lib/google";
+import { createJWT } from "../../lib/jwt";
+import { createOptionsCookie } from "../../lib/cookies";
  
 function googleLogin(req: Request, res: Response) {
   return res.redirect(getConnectionUrl());
