@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { body } from "express-validator";
-import institutionController from "./../../controllers/v1/institution_controller";
+const { Router } =  require("express");
+const { body } = require("express-validator");
+const institutionController = require("../../controllers/v1/institution_controller");
 
 const router = Router();
 
@@ -21,4 +21,5 @@ router.put("/:id",
   institutionController.updateInstitutionController)
 
 router.delete("/:id", institutionController.deleteInstitutionController)
-export default router;
+
+module.exports = router;

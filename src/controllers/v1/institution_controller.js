@@ -1,8 +1,7 @@
-import { Request, Response } from "express";
-import { createInstitution, getInstitutions, updateInstiution, deleteInstitution } from "../../services/institution_service";
-import { validationResult } from "express-validator";
+const { createInstitution, getInstitutions, updateInstiution, deleteInstitution } = require("../../services/institution_service");
+const { validationResult } = require("express-validator");
 
-async function getInstitutionsController(req: Request, res: Response) {
+async function getInstitutionsController(req, res) {
   try {
     const institutions = await getInstitutions();
     return res.status(200).json({ data: institutions })
@@ -11,7 +10,7 @@ async function getInstitutionsController(req: Request, res: Response) {
   }
 }
 
-async function createInstitutionController(req: Request, res: Response) {
+async function createInstitutionController(req, res) {
   const errors = validationResult(req)
   if(!errors.isEmpty()){
     return res.status(400).json({ errors: errors.array() })
@@ -25,7 +24,7 @@ async function createInstitutionController(req: Request, res: Response) {
   }
 }
 
-async function updateInstitutionController(req: Request, res: Response) {
+async function updateInstitutionController(req, res) {
   const { id } = req.params;
 
   const errors = validationResult(req)
@@ -41,7 +40,7 @@ async function updateInstitutionController(req: Request, res: Response) {
   }
 }
 
-async function deleteInstitutionController(req: Request, res: Response){
+async function deleteInstitutionController(req, res){
   const { id } = req.params;
 
   try {
@@ -52,7 +51,7 @@ async function deleteInstitutionController(req: Request, res: Response){
   }
 }
 
-export default {
+module.exports = {
   getInstitutionsController,
   createInstitutionController,
   updateInstitutionController,

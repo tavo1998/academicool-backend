@@ -1,11 +1,11 @@
-import prisma from "./../config/database";
+const prisma =  require("../config/database");
 
-export async function checkUserRegister(email: string) {
+async function checkUserRegister(email) {
   const user = await getUserByEmail(email)
   if(!user) return false;
 }
 
-export async function getUserByEmail(email: string) {
+async function getUserByEmail(email) {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -19,7 +19,7 @@ export async function getUserByEmail(email: string) {
   }
 }
 
-export async function getUserById(id: number) {
+async function getUserById(id) {
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -31,4 +31,10 @@ export async function getUserById(id: number) {
     console.log(e);
     throw e;
   }
+}
+
+module.exports = {
+  checkUserRegister,
+  getUserByEmail,
+  getUserById
 }

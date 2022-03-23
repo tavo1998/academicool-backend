@@ -1,8 +1,8 @@
-import express, { Request, Response } from "express"
-import authRouterV1 from "./routers/v1/auth";
-import institutionRouterV1 from "./routers/v1/institution";
-import cookieParser from "cookie-parser";
-import morgan from "morgan";
+const express = require("express");
+const authRouterV1 = require("./routers/v1/auth");
+const institutionRouterV1 = require("./routers/v1/institution");
+const cookieParser = require("cookie-parser");
+const morgan = require("morgan");
 
 const app = express();
 

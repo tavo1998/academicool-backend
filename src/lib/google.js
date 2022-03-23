@@ -1,17 +1,16 @@
-import { google } from "googleapis";
-import { Credentials } from "google-auth-library"
-import { oauth2Client, scopes } from "./../config/google_auth"
+const { google } = require("googleapis");
+const { oauth2Client, scopes } = require("../config/google_auth");
 
 const oauth2 = google.oauth2("v2");
 
-export function getConnectionUrl() {
+function getConnectionUrl() {
   const url = oauth2Client.generateAuthUrl({
     scope: scopes
   })
   return url
 }
 
-export async function getGoogleTokens(code: string) {
+async function getGoogleTokens(code) {
   try {
     const { tokens } = await oauth2Client.getToken(code)
     return tokens
@@ -21,7 +20,7 @@ export async function getGoogleTokens(code: string) {
   }
 }
 
-export async function getUserDetails(tokens: Credentials){
+async function getUserDetails(tokens){
   oauth2Client.setCredentials(tokens);
   try{
     const userInfo = await oauth2.userinfo.get({auth: oauth2Client});
@@ -30,4 +29,10 @@ export async function getUserDetails(tokens: Credentials){
     console.log(e)
     throw e;
   }
+}
+
+module.exports = {
+  getGoogleTokens,
+  getUserDetails,
+  getConnectionUrl
 }
