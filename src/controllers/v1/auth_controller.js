@@ -10,7 +10,7 @@ async function googleCallback(req, res) {
   try {
     const jwt = createJWT({ userId: req.userId });
     res.cookie("user_auth_token", jwt, createOptionsCookie(1));
-    return res.redirect("/")
+    return res.redirect(`${process.env.CLIENT_URL}/`)
   }catch(e) {
     console.log(e)
     return res.json({

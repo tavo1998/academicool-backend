@@ -10,7 +10,7 @@ async function checkUserExist(req, res, next) {
     const userInfo = await getUserDetails(tokens)
     const user = await checkUserRegister(userInfo.email)
     if(!user){
-      return res.redirect(`/login?error=${errorMessage}`)
+      return res.redirect(`${process.env.CLIENT_URL}/login?error=${errorMessage}`)
     }
     req.userInfo = userInfo;
     req.userId = user.id
