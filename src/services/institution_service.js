@@ -1,28 +1,28 @@
-const prisma = require("../config/database");
+const prisma = require('../config/database')
 
-async function getInstitutions() {
+async function getInstitutions () {
   try {
     const institutions = await prisma.institution.findMany()
     return institutions
-  }catch(e) {
+  } catch (e) {
     console.log(e)
-    throw e; 
+    throw e
   }
 }
 
-async function createInstitution(data) {
+async function createInstitution (data) {
   try {
     const institution = await prisma.institution.create({
       data: data
     })
     return institution
-  }catch(e) {
+  } catch (e) {
     console.log(e)
-    throw e;
+    throw e
   }
 }
 
-async function updateInstiution(id, data){
+async function updateInstiution (id, data) {
   try {
     const updatedInstitution = await prisma.institution.update({
       where: {
@@ -30,24 +30,24 @@ async function updateInstiution(id, data){
       },
       data: data
     })
-    return updatedInstitution;
-  }catch(e) {
+    return updatedInstitution
+  } catch (e) {
     console.log(e)
-    throw e;
+    throw e
   }
 }
 
-async function deleteInstitution(id) {
+async function deleteInstitution (id) {
   try {
     const deletedUser = await prisma.institution.delete({
       where: {
         id
       }
     })
-    return deletedUser;
-  }catch(e) {
-    console.log(e);
-    throw e;
+    return deletedUser
+  } catch (e) {
+    console.log(e)
+    throw e
   }
 }
 

@@ -32,6 +32,10 @@
   },
   "devDependencies": {
     "nodemon": "^1.11.1",
-    "prisma": "^3.11.0"
+    "prisma": "^3.11.0",
+    "standard": "^16.0.4"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }
