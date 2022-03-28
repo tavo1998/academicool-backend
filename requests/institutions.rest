@@ -1,2 +1,4 @@
-http://localhost:5000/api/v1/institutions
+GET http://localhost:5000/api/v1/institutions
 Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODQ5MTk5MSwiZXhwIjoxNjQ4NDkyMjkxfQ.HdSXQSneCsgsg0LbEjtEG0pHN3sGpUmLbZjwQPP1zic
+
+###
