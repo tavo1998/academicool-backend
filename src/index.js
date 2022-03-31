@@ -4,9 +4,14 @@ const institutionRouterV1 = require('./routers/v1/institution')
 const userRouterV1 = require('./routers/v1/user')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 const app = express()
 
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
