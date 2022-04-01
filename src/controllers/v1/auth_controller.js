@@ -6,7 +6,7 @@ const { Role } = require('@prisma/client')
 function roleRedirectUrl (role) {
   if (role === Role.ADMIN) return process.env.CLIENT_URL + '/dashboard/admin'
   if (role === Role.ATTENDANT) return process.env.CLIENT_URL + '/dashboard/attendant'
-  if (role === Role.ATTENDANT) return process.env.CLIENT_URL + '/dashboard/teacher'
+  if (role === Role.TEACHER) return process.env.CLIENT_URL + '/dashboard/teacher'
 }
 
 function googleLogin (req, res) {
