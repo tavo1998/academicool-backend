@@ -1,4 +1,12 @@
 GET http://localhost:5000/api/v1/institutions
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODQ5MTk5MSwiZXhwIjoxNjQ4NDkyMjkxfQ.HdSXQSneCsgsg0LbEjtEG0pHN3sGpUmLbZjwQPP1zic
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODY1OTk5MCwiZXhwIjoxNjQ4NjYzNTkwfQ.L4jc4xMNSxUerqUcPTsXQKQKn8DYp803vUOlxlzmqZc
 
 ###
+POST http://localhost:5000/api/v1/institutions
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0ODgyNzYwNiwiZXhwIjoxNjQ4ODI4MjA2fQ.oW6N0onY7bvFq7bG3N7XJoyz2Kz9tB3qNXkIHHQ__sU
+Content-Type: application/json
+
+{
+  "name": "Test institution",
+  "address": "Calle 30"
+}

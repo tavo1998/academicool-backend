@@ -21,8 +21,8 @@ router.post(
   checkIsAuthenticated,
   checkIsAdmin,
   body('name').isLength({ max: 100 }).notEmpty(),
-  body('mision').isLength({ max: 280 }).notEmpty().optional(),
-  body('vision').isLength({ max: 280 }).notEmpty().optional(),
+  body('mision').isLength({ max: 280 }).optional(),
+  body('vision').isLength({ max: 280 }).optional(),
   body('address').isLength({ max: 100 }).notEmpty(),
   institutionController.createInstitutionController)
 
@@ -31,9 +31,9 @@ router.put('/:id',
   checkIsAuthenticated,
   checkIsAdmin,
   body('name').isLength({ max: 100 }).notEmpty().optional(),
-  body('mision').isLength({ max: 280 }).notEmpty().optional(),
-  body('vision').isLength({ max: 280 }).notEmpty().optional(),
-  body('address').isLength({ max: 100 }).notEmpty().optional(),
+  body('mision').isLength({ max: 280 }).optional(),
+  body('vision').isLength({ max: 280 }).optional(),
+  body('address').isLength({ max: 100 }).optional(),
   institutionController.updateInstitutionController)
 
 router.delete(
