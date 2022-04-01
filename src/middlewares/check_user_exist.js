@@ -1,5 +1,5 @@
 const { getGoogleTokens, getUserDetails } = require('../lib/google')
-const { checkUserRegister } = require('../services/user_service')
+const { getUserByEmail } = require('../services/user_service')
 
 async function checkUserExist (req, res, next) {
   const code = req.query.code
@@ -8,12 +8,12 @@ async function checkUserExist (req, res, next) {
   try {
     const tokens = await getGoogleTokens(code)
     const userInfo = await getUserDetails(tokens)
-    const user = await checkUserRegister(userInfo.email)
+    const user = await getUserByEmail(userInfo.email)
     if (!user) {
       return res.redirect(`${process.env.CLIENT_URL}/login?error=${errorMessage}`)
     }
     req.userInfo = userInfo
-    req.userId = user.id
+    req.user = user
     next()
   } catch (e) {
     console.log(e)

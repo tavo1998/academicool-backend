@@ -1,10 +1,5 @@
 const prisma = require('../config/database')
 
-async function checkUserRegister (email) {
-  const user = await getUserByEmail(email)
-  return user
-}
-
 async function getUserByEmail (email) {
   try {
     const user = await prisma.user.findUnique({
@@ -34,7 +29,6 @@ async function getUserById (id) {
 }
 
 module.exports = {
-  checkUserRegister,
   getUserByEmail,
   getUserById
 }

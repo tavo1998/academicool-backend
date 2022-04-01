@@ -2,7 +2,6 @@ const { createInstitution, getInstitutions, updateInstiution, deleteInstitution 
 const { validationResult } = require('express-validator')
 
 async function getInstitutionsController (req, res) {
-  console.log(req.user)
   try {
     const institutions = await getInstitutions()
     return res.status(200).json({ data: institutions })
