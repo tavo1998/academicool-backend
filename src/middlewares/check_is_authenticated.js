@@ -1,5 +1,5 @@
 function checkIsAuthenticated (req, res, next) {
-  if (!req.user) return res.status(403).json({ message: 'Unauthorized user' })
+  if (!req.user) return res.status(401).json({ message: 'Unauthenticated user' })
   return next()
 }
 
