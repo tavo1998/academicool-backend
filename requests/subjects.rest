@@ -1,0 +1,2 @@
+GET http://localhost:5000/api/v1/subjects
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTY0ODg1ODgzNSwiZXhwIjoxNjQ4ODU5NDM1fQ.iZKkAMjTIC2mVNMKzPdD8RUJVgDhPUnhFSMjY6z88cs
