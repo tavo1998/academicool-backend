@@ -37,4 +37,23 @@ router.post(
   subjectController.postSubjectAssignmentsController
 )
 
+router.get(
+  '/:subjectId/notices',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetTeacherAssignments,
+  subjectController.getSubjectNoticesController
+)
+
+router.post(
+  '/:subjectId/notices',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetTeacherAssignments,
+  body('title').isLength({ max: 100 }).notEmpty(),
+  body('description').isLength({ max: 280 }).notEmpty(),
+  validateErros,
+  subjectController.postSubjectNoticesController
+)
+
 module.exports = router

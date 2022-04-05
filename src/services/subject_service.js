@@ -41,6 +41,23 @@ const getSubjectAssignments = async (subjectId) => {
   }
 }
 
+const getSubjectNotices = async (subjectId) => {
+  try {
+    const notices = await prisma.notice.findMany({
+      where: {
+        subject_id: subjectId
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return notices
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 const isTeacherOfSubject = async (subjectId, userId) => {
   try {
     const subject = await prisma.subject.findUnique({
@@ -61,5 +78,6 @@ module.exports = {
   getSubjects,
   getTeacherSubjects,
   isTeacherOfSubject,
-  getSubjectAssignments
+  getSubjectAssignments,
+  getSubjectNotices
 }

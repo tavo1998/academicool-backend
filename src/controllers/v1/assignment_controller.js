@@ -5,7 +5,7 @@ const updateAssignmentController = async (req, res) => {
 
   try {
     const assignment = await updateAssignment(parseInt(assignmentId), req.body)
-    return res.status(200).json({ daa: assignment })
+    return res.status(200).json({ data: assignment })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while updating record' })
   }
