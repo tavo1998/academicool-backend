@@ -1,2 +1,18 @@
 GET http://localhost:5000/api/v1/subjects
 Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTY0ODg1ODgzNSwiZXhwIjoxNjQ4ODU5NDM1fQ.iZKkAMjTIC2mVNMKzPdD8RUJVgDhPUnhFSMjY6z88cs
+
+###
+GET http://localhost:5000/api/v1/subjects/1/assignments
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTExNTI3NiwiZXhwIjoxNjQ5MTE1ODc2fQ.TT_67eMjRO8p_Fni5JkH-PkBOMG4PbxPrbDMHOhZPOM
+
+###
+
+POST http://localhost:5000/api/v1/subjects/1/assignments
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTEyMjM5NSwiZXhwIjoxNjQ5MTIyOTk1fQ.UlzEyAYGP7xN3QKaJNebKS4hkGxUOlIg2ptTilcieVI
+Content-Type: application/json
+
+{
+  "title": "Esta es una asignación",
+  "description": "Esta es la descripción de la primera asignación",
+  "delivery_date": "2022-04-04T00:00:00.000Z"
+}

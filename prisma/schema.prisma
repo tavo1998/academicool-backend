@@ -140,8 +140,9 @@ model Assigment {
   id Int @id @default(autoincrement())
   title String @db.VarChar(100)
   description String @db.VarChar(280)
-  assigment_type AssigmentType @relation(fields: [assigment_type_id], references: [id])
-  assigment_type_id Int
+  delivery_date DateTime @db.Date
+  assigment_type AssigmentType? @relation(fields: [assigment_type_id], references: [id])
+  assigment_type_id Int?
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   scores Score[]

@@ -24,7 +24,39 @@ const getTeacherSubjects = async (teacherId) => {
   }
 }
 
+const getSubjectAssignments = async (subjectId) => {
+  try {
+    const assignments = prisma.assigment.findMany({
+      where: {
+        subject_id: parseInt(subjectId)
+      }
+    })
+    return assignments
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const isTeacherOfSubject = async (subjectId, userId) => {
+  try {
+    const subject = await prisma.subject.findUnique({
+      where: {
+        id: parseInt(subjectId)
+      }
+    })
+
+    if (!subject) return false
+
+    return subject.teacher_id === userId
+  } catch (e) {
+    return false
+  }
+}
+
 module.exports = {
   getSubjects,
-  getTeacherSubjects
+  getTeacherSubjects,
+  isTeacherOfSubject,
+  getSubjectAssignments
 }
