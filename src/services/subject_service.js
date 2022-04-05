@@ -29,6 +29,9 @@ const getSubjectAssignments = async (subjectId) => {
     const assignments = prisma.assigment.findMany({
       where: {
         subject_id: parseInt(subjectId)
+      },
+      orderBy: {
+        id: 'desc'
       }
     })
     return assignments
