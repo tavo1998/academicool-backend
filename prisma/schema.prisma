@@ -19,6 +19,7 @@ model Institution {
   users User[]
   subjects Subject[]
   students Student[]
+  grades Grade[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
@@ -44,6 +45,8 @@ model User {
 model Grade {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
+  institution Institution @relation(fields: [institution_id], references: [id])
+  institution_id Int
   subjects Subject[]
   students Student[]
   created_at DateTime @default(now())
@@ -52,6 +55,7 @@ model Grade {
 
 model Subject {
   id Int @id @default(autoincrement())
+  name String @db.VarChar(100)
   description String @db.VarChar(280)
   subject_date DateTime @db.Date
   institution Institution @relation(fields: [institution_id], references: [id])
@@ -136,8 +140,9 @@ model Assigment {
   id Int @id @default(autoincrement())
   title String @db.VarChar(100)
   description String @db.VarChar(280)
-  assigment_type AssigmentType @relation(fields: [assigment_type_id], references: [id])
-  assigment_type_id Int
+  delivery_date DateTime @db.Date
+  assigment_type AssigmentType? @relation(fields: [assigment_type_id], references: [id])
+  assigment_type_id Int?
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   scores Score[]

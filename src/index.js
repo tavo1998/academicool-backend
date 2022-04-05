@@ -1,6 +1,8 @@
 const express = require('express')
 const authRouterV1 = require('./routers/v1/auth')
+const subjectRouter = require('./routers/v1/subject')
 const institutionRouterV1 = require('./routers/v1/institution')
+const assignmentRoterV1 = require('./routers/v1/assignment')
 const userRouterV1 = require('./routers/v1/user')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
@@ -19,6 +21,8 @@ app.use(morgan('tiny'))
 
 app.use('/api/v1/auth', authRouterV1)
 app.use('/api/v1/institutions', institutionRouterV1)
+app.use('/api/v1/subjects', subjectRouter)
+app.use('/api/v1/assignments', assignmentRoterV1)
 app.use('/api/v1/users', userRouterV1)
 
 app.listen(process.env.PORT, () => {

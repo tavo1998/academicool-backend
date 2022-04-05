@@ -1,0 +1,7 @@
+PUT http://localhost:5000/api/v1/assignments/1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTE4NTY5OSwiZXhwIjoxNjQ5MTg2Mjk5fQ.uSsXURFFpwoNPiOWZU8YhiE9Rx96qpMFnPWbqIJaTjA
+Content-Type: application/json
+
+{
+  "title": "ESTO ES UNA PRIMERA ASIGNACIÓN"
+}
