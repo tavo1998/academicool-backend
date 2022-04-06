@@ -5,6 +5,7 @@ const checkIsAuthenticated = require('../../middlewares/check_is_authenticated')
 const checkUserCookie = require('../../middlewares/check_user_cookie')
 const canUpdateAssignment = require('../../middlewares/can_update_assignment')
 const validateErros = require('../../middlewares/validate_errors')
+const canQualifyAssignments = require('../../middlewares/can_qualify_assignment')
 
 const router = Router()
 
@@ -28,6 +29,7 @@ router.post(
   body('*.user_id').isInt(),
   body('*.value').isDecimal({ force_decimal: false, decimal_digits: 1 }).isFloat({ min: 0, max: 5 }),
   validateErros,
+  canQualifyAssignments,
   assignmentController.qualifyAssignmentController
 )
 
