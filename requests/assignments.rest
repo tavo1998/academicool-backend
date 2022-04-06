@@ -5,3 +5,16 @@ Content-Type: application/json
 {
   "title": "ESTO ES UNA PRIMERA ASIGNACIÓN"
 }
+
+###
+
+POST http://localhost:5000/api/v1/assignments/1/qualify
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTI3NDg1OSwiZXhwIjoxNjQ5Mjc1NDU5fQ.S_e2OjWDlU4Fz_7xeYxxqKk_JEJQTJZ7oJ2-0ad2C0w
+Content-Type: application/json
+
+[
+  {
+    "user_id": 1,
+    "value": 1
+  }
+]

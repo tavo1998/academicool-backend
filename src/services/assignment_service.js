@@ -1,3 +1,4 @@
+const { student } = require('./../config/database')
 const prisma = require('./../config/database')
 
 const getAssignmentById = async (id, includeSubject = false) => {
@@ -55,9 +56,39 @@ const isAssignmentOfTeacher = async (assignmentId, userId) => {
   }
 }
 
+const qualifyAssignment = async (assigmentId, scores) => {
+  const scoresTransformed = scores.map((score) => ({
+    score: score.value,
+    student: {
+      connect: {
+        id: score.user_id
+      }
+    }
+  }))
+
+  try {
+    const assignment = await prisma.assigment.update({
+      where: {
+        id: assigmentId
+      },
+      data: {
+        is_qualified: true,
+        scores: {
+          create: scoresTransformed
+        }
+      }
+    })
+    return assignment
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   createAssignment,
   updateAssignment,
   getAssignmentById,
-  isAssignmentOfTeacher
+  isAssignmentOfTeacher,
+  qualifyAssignment
 }

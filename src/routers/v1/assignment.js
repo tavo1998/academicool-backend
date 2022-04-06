@@ -20,4 +20,15 @@ router.put(
   assignmentController.updateAssignmentController
 )
 
+router.post(
+  '/:assignmentId/qualify',
+  checkUserCookie,
+  checkIsAuthenticated,
+  body().isArray(),
+  body('*.user_id').isInt(),
+  body('*.value').isDecimal({ force_decimal: false, decimal_digits: 1 }).isFloat({ min: 0, max: 5 }),
+  validateErros,
+  assignmentController.qualifyAssignmentController
+)
+
 module.exports = router
