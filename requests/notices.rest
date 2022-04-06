@@ -1,0 +1,8 @@
+PUT http://localhost:5000/api/v1/notices/1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY0OTE5MDU5NCwiZXhwIjoxNjQ5MTkxMTk0fQ.d9zWUNQ3sbNXquiMTZdRqzhwBxQJzMD6R_Tpn6aP_PI
+Content-Type: application/json
+
+{
+  "title": "PROBANDOO",
+  "description": "ESTO ES UNA DESCRIPTION"
+}

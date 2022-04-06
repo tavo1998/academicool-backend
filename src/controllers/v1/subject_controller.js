@@ -1,6 +1,7 @@
 const { Role } = require('@prisma/client')
 const { createAssignment } = require('../../services/assignment_service')
-const { getSubjects, getTeacherSubjects, getSubjectAssignments } = require('../../services/subject_service')
+const { createNotice } = require('../../services/notice_service')
+const { getSubjects, getTeacherSubjects, getSubjectAssignments, getSubjectNotices } = require('../../services/subject_service')
 
 const getSubjectsController = async (req, res) => {
   let subjects
@@ -42,8 +43,35 @@ const postSubjectAssignmentsController = async (req, res) => {
   }
 }
 
+const getSubjectNoticesController = async (req, res) => {
+  const { subjectId } = req.params
+  try {
+    const notices = await getSubjectNotices(parseInt(subjectId))
+    return res.status(200).json({ data: notices })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while get records' })
+  }
+}
+
+const postSubjectNoticesController = async (req, res) => {
+  const { subjectId } = req.params
+  req.body.subject = {
+    connect: {
+      id: parseInt(subjectId)
+    }
+  }
+  try {
+    const notice = await createNotice(req.body)
+    return res.status(201).json({ data: notice })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while creating record' })
+  }
+}
+
 module.exports = {
   getSubjectsController,
   getSubjectAssignmentsController,
-  postSubjectAssignmentsController
+  postSubjectAssignmentsController,
+  getSubjectNoticesController,
+  postSubjectNoticesController
 }

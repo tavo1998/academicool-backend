@@ -1,23 +1,22 @@
 const { Router } = require('express')
 const { body } = require('express-validator')
-const assignmentController = require('./../../controllers/v1/assignment_controller')
+const noticeController = require('./../../controllers/v1/notice_controller')
 const checkIsAuthenticated = require('../../middlewares/check_is_authenticated')
 const checkUserCookie = require('../../middlewares/check_user_cookie')
-const canUpdateAssignment = require('../../middlewares/can_update_assignment')
-const validateErros = require('../../middlewares/validate_errors')
+const canUpdateNotice = require('../../middlewares/can_update_notice')
+const validateErrors = require('./../../middlewares/validate_errors')
 
 const router = Router()
 
 router.put(
-  '/:assignmentId',
+  '/:noticeId',
   checkUserCookie,
   checkIsAuthenticated,
-  canUpdateAssignment,
+  canUpdateNotice,
   body('title').isLength({ max: 100 }).notEmpty().optional(),
   body('description').isLength({ max: 280 }).notEmpty().optional(),
-  body('delivery_date').isISO8601().notEmpty().optional(),
-  validateErros,
-  assignmentController.updateAssignmentController
+  validateErrors,
+  noticeController.updateNoticeController
 )
 
 module.exports = router

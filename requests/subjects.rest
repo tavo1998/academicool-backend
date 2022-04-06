@@ -16,3 +16,19 @@ Content-Type: application/json
   "description": "Esta es la descripción de la primera asignación",
   "delivery_date": "2022-04-04T00:00:00.000Z"
 }
+
+###
+
+GET http://localhost:5000/api/v1/subjects/1/notices
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTE4Nzk1MywiZXhwIjoxNjQ5MTg4NTUzfQ.BpPaLExat9sAThLj1SpLNZ1S0DZmwepM5U9WzytUkDU
+
+###
+
+POST http://localhost:5000/api/v1/subjects/1/notices
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTE4OTU1NSwiZXhwIjoxNjQ5MTkwMTU1fQ.gTptu7bUQKY5yZSARU1-3j0CcfSa5opjeQKB4E-bmyY
+Content-Type: application/json
+
+{
+  "title": "Probando",
+  "description": "Perfecto"
+}
