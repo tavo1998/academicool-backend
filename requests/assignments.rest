@@ -18,3 +18,7 @@ Content-Type: application/json
     "value": 1
   }
 ]
+
+###
+GET http://localhost:5000/api/v1/assignments/1/scores
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTI3OTY0MSwiZXhwIjoxNjQ5MjgwMjQxfQ.4-2SPw047vQy9QBIcZaK8pmaEoW41FOkTNnOLW0Ko-M

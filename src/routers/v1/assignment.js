@@ -33,4 +33,12 @@ router.post(
   assignmentController.qualifyAssignmentController
 )
 
+router.get(
+  '/:assignmentId/scores',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canQualifyAssignments,
+  assignmentController.getAssignmentScoresController
+)
+
 module.exports = router

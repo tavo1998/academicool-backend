@@ -1,4 +1,4 @@
-const { updateAssignment, qualifyAssignment } = require('../../services/assignment_service')
+const { updateAssignment, qualifyAssignment, getAssignmentScores } = require('../../services/assignment_service')
 
 const updateAssignmentController = async (req, res) => {
   const { assignmentId } = req.params
@@ -21,7 +21,18 @@ const qualifyAssignmentController = async (req, res) => {
   }
 }
 
+const getAssignmentScoresController = async (req, res) => {
+  const { assignmentId } = req.params
+  try {
+    const scores = await getAssignmentScores(parseInt(assignmentId), true)
+    return res.status(200).json({ data: scores })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while fetching records' })
+  }
+}
+
 module.exports = {
   updateAssignmentController,
-  qualifyAssignmentController
+  qualifyAssignmentController,
+  getAssignmentScoresController
 }

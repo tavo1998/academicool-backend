@@ -1,4 +1,3 @@
-const { student } = require('./../config/database')
 const prisma = require('./../config/database')
 
 const getAssignmentById = async (id, includeSubject = false) => {
@@ -85,10 +84,29 @@ const qualifyAssignment = async (assigmentId, scores) => {
   }
 }
 
+const getAssignmentScores = async (assignmentId, includeStudent = false, includeAssignment = false) => {
+  try {
+    const scores = await prisma.score.findMany({
+      where: {
+        assigment_id: assignmentId
+      },
+      include: {
+        student: includeStudent,
+        assigment: includeAssignment
+      }
+    })
+    return scores
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   createAssignment,
   updateAssignment,
   getAssignmentById,
   isAssignmentOfTeacher,
-  qualifyAssignment
+  qualifyAssignment,
+  getAssignmentScores
 }
