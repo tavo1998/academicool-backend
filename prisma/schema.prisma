@@ -141,6 +141,7 @@ model Assigment {
   title String @db.VarChar(100)
   description String @db.VarChar(280)
   delivery_date DateTime @db.Date
+  is_qualified Boolean @default(false)
   assigment_type AssigmentType? @relation(fields: [assigment_type_id], references: [id])
   assigment_type_id Int?
   subject Subject @relation(fields: [subject_id], references: [id])

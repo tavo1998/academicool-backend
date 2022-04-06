@@ -1,0 +1,2 @@
+GET http://localhost:5000/api/v1/grades/2/students
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTI2ODYyMiwiZXhwIjoxNjQ5MjY5MjIyfQ.iM2YaoBoZ1Be_mb1535GXPd95p9pcjWv2EAYYQJSiZc
