@@ -141,6 +141,7 @@ model Assigment {
   title String @db.VarChar(100)
   description String @db.VarChar(280)
   delivery_date DateTime @db.Date
+  is_qualified Boolean @default(false)
   assigment_type AssigmentType? @relation(fields: [assigment_type_id], references: [id])
   assigment_type_id Int?
   subject Subject @relation(fields: [subject_id], references: [id])
@@ -155,7 +156,7 @@ model Score {
   assigment_id Int
   student Student @relation(fields: [student_id], references: [id])
   student_id Int
-
+  score Decimal
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   @@id([assigment_id, student_id])

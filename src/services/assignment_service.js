@@ -55,9 +55,86 @@ const isAssignmentOfTeacher = async (assignmentId, userId) => {
   }
 }
 
+const transformScoresToPost = (scores) => {
+  const transformedScores = scores.map((score) => ({
+    score: score.value,
+    student: {
+      connect: {
+        id: score.student_id
+      }
+    }
+  }))
+
+  return transformedScores
+}
+
+const qualifyAssignment = async (assigmentId, scores) => {
+  const scoresTransformed = transformScoresToPost(scores)
+
+  try {
+    const assignment = await prisma.assigment.update({
+      where: {
+        id: assigmentId
+      },
+      data: {
+        is_qualified: true,
+        scores: {
+          create: scoresTransformed
+        }
+      }
+    })
+    return assignment
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const getAssignmentScores = async (assignmentId, includeStudent = false, includeAssignment = false) => {
+  try {
+    const scores = await prisma.score.findMany({
+      where: {
+        assigment_id: assignmentId
+      },
+      include: {
+        student: includeStudent,
+        assigment: includeAssignment
+      }
+    })
+    return scores
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const updateAssignmentScores = (assigmentId, scores) => {
+  try {
+    const updatedScores = prisma.$transaction(
+      scores.map(score =>
+        prisma.score.update({
+          where: {
+            assigment_id_student_id: {
+              assigment_id: assigmentId,
+              student_id: score.student_id
+            }
+          },
+          data: { score: score.value }
+        }))
+    )
+    return updatedScores
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   createAssignment,
   updateAssignment,
   getAssignmentById,
-  isAssignmentOfTeacher
+  isAssignmentOfTeacher,
+  qualifyAssignment,
+  getAssignmentScores,
+  updateAssignmentScores
 }
