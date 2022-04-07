@@ -1,0 +1,10 @@
+PUT http://localhost:5000/api/v1/assistances/4/students
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTM2NDI1NCwiZXhwIjoxNjQ5MzY0ODU0fQ.KD_rY9wfV0YLkuoie3-fj4Pw4sT3u3YJmiIu80pFpRk
+Content-Type: application/json
+
+[
+  {
+    "student_id": 1,
+    "attended": false
+  }
+]
