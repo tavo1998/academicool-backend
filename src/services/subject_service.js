@@ -94,11 +94,56 @@ const getSubjectAssistances = async (subjectId, date) => {
   }
 }
 
+const transformAssistancesToPost = (assistances) => {
+  return assistances.map(assistance => ({
+    attended: assistance.attended,
+    student: {
+      connect: {
+        id: assistance.student_id
+      }
+    }
+  }))
+}
+
+const postSubjectAssistance = async (subjectId, data) => {
+  try {
+    const assistance = await prisma.assistance.create({
+      data: {
+        description: data.description,
+        date: new Date(),
+        subject: {
+          connect: {
+            id: subjectId
+          }
+        },
+        students: {
+          create: transformAssistancesToPost(data.assistances)
+        }
+      }
+    })
+    return assistance
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+// {
+//   description: "",
+//   assistances: [
+//     {
+//       student_id: '',
+//       attended: false
+//     }
+//   ]
+// }
+
 module.exports = {
   getSubjects,
   getTeacherSubjects,
   isTeacherOfSubject,
   getSubjectAssignments,
   getSubjectNotices,
-  getSubjectAssistances
+  getSubjectAssistances,
+  postSubjectAssistance
 }

@@ -1,7 +1,7 @@
 const { Role } = require('@prisma/client')
 const { createAssignment } = require('../../services/assignment_service')
 const { createNotice } = require('../../services/notice_service')
-const { getSubjects, getTeacherSubjects, getSubjectAssignments, getSubjectNotices, getSubjectAssistances } = require('../../services/subject_service')
+const { getSubjects, getTeacherSubjects, getSubjectAssignments, getSubjectNotices, getSubjectAssistances, postSubjectAssistance } = require('../../services/subject_service')
 
 const getSubjectsController = async (req, res) => {
   let subjects
@@ -79,11 +79,22 @@ const getSubjectAssistancesController = async (req, res) => {
   }
 }
 
+const qualifySubjectAssistanceController = async (req, res) => {
+  const { subjectId } = req.params
+  try {
+    const assistance = await postSubjectAssistance(parseInt(subjectId), req.body)
+    return res.status(201).json({ data: assistance })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while creating record' })
+  }
+}
+
 module.exports = {
   getSubjectsController,
   getSubjectAssignmentsController,
   postSubjectAssignmentsController,
   getSubjectNoticesController,
   postSubjectNoticesController,
-  getSubjectAssistancesController
+  getSubjectAssistancesController,
+  qualifySubjectAssistanceController
 }

@@ -68,4 +68,20 @@ router.get(
   subjectController.getSubjectAssistancesController
 )
 
+router.post(
+  '/:subjectId/assistances',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetTeacherAssignments,
+  body('description', 'You must provide a description')
+    .notEmpty()
+    .isLength({ max: 280 })
+    .withMessage('The description must have a maximum of 280 characters'),
+  body('assistances').isArray(),
+  body('assistances.*.student_id', 'assistance must have student id').isInt(),
+  body('assistances.*.attended', 'assistance must have attended status').isBoolean(),
+  validateErros,
+  subjectController.qualifySubjectAssistanceController
+)
+
 module.exports = router
