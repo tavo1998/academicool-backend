@@ -22,7 +22,7 @@ router.put(
 )
 
 router.post(
-  '/:assignmentId/qualify',
+  '/:assignmentId/scores',
   checkUserCookie,
   checkIsAuthenticated,
   canQualifyAssignments,
@@ -34,7 +34,7 @@ router.post(
 )
 
 router.put(
-  '/:assignmentId/qualify',
+  '/:assignmentId/scores',
   checkUserCookie,
   checkIsAuthenticated,
   canQualifyAssignments,
