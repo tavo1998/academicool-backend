@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { body } = require('express-validator')
+const { body, query } = require('express-validator')
 const canGetSubjects = require('../../middlewares/can_get_subjects')
 const checkIsAuthenticated = require('../../middlewares/check_is_authenticated')
 const checkUserCookie = require('../../middlewares/check_user_cookie')
@@ -54,6 +54,18 @@ router.post(
   body('description').isLength({ max: 280 }).notEmpty(),
   validateErros,
   subjectController.postSubjectNoticesController
+)
+
+router.get(
+  '/:subjectId/assistances',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetTeacherAssignments,
+  query('date', 'You must provide the query parameter date')
+    .isISO8601('probando')
+    .withMessage('The date must be in ISO8601 format'),
+  validateErros,
+  subjectController.getSubjectAssistancesController
 )
 
 module.exports = router

@@ -74,10 +74,31 @@ const isTeacherOfSubject = async (subjectId, userId) => {
   }
 }
 
+const getSubjectAssistances = async (subjectId, date) => {
+  try {
+    const assistance = await prisma.assistance.findUnique({
+      where: {
+        date_subject_id: {
+          subject_id: subjectId,
+          date: new Date(date)
+        }
+      },
+      include: {
+        students: true
+      }
+    })
+    return assistance
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getSubjects,
   getTeacherSubjects,
   isTeacherOfSubject,
   getSubjectAssignments,
-  getSubjectNotices
+  getSubjectNotices,
+  getSubjectAssistances
 }

@@ -32,3 +32,7 @@ Content-Type: application/json
   "title": "Probando",
   "description": "Perfecto"
 }
+
+###
+GET http://localhost:5000/api/v1/subjects/1/assistances?date=2022-04-07
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTM1NjEwOCwiZXhwIjoxNjQ5MzU2NzA4fQ.Ubp0phnqFjdGDTkJ4NFqSRMHec-HtskR-VvVYyFa5uk
