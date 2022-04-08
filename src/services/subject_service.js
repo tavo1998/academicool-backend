@@ -74,10 +74,89 @@ const isTeacherOfSubject = async (subjectId, userId) => {
   }
 }
 
+const getSubjectAssistances = async (subjectId, date) => {
+  try {
+    const assistance = await prisma.assistance.findUnique({
+      where: {
+        date_subject_id: {
+          subject_id: subjectId,
+          date: new Date(date)
+        }
+      },
+      include: {
+        students: {
+          select: {
+            attended: true,
+            student: {
+              select: {
+                id: true,
+                first_name: true,
+                last_name: true
+              }
+            }
+          },
+          orderBy: [
+            {
+              student: {
+                first_name: 'asc'
+              }
+            },
+            {
+              student: {
+                last_name: 'asc'
+              }
+            }
+          ]
+        }
+      }
+    })
+    return assistance
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const transformAssistancesToPost = (assistances) => {
+  return assistances.map(assistance => ({
+    attended: assistance.attended,
+    student: {
+      connect: {
+        id: assistance.student_id
+      }
+    }
+  }))
+}
+
+const postSubjectAssistance = async (subjectId, data) => {
+  try {
+    const assistance = await prisma.assistance.create({
+      data: {
+        description: data.description,
+        date: new Date(),
+        subject: {
+          connect: {
+            id: subjectId
+          }
+        },
+        students: {
+          create: transformAssistancesToPost(data.assistances)
+        }
+      }
+    })
+    return assistance
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getSubjects,
   getTeacherSubjects,
   isTeacherOfSubject,
   getSubjectAssignments,
-  getSubjectNotices
+  getSubjectNotices,
+  getSubjectAssistances,
+  postSubjectAssistance
 }
