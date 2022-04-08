@@ -13,9 +13,10 @@ router.put(
   checkUserCookie,
   checkIsAuthenticated,
   canUpdateAssistanceStudents,
-  body().isArray(),
-  body('*.student_id').isInt(),
-  body('*.attended').isBoolean(),
+  body('description').notEmpty().isLength({ max: 280 }),
+  body('assistances').isArray(),
+  body('assistances.*.student_id').isInt(),
+  body('assistances.*.attended').isBoolean(),
   validateErrors,
   assistanceController.updateAssistanceStudentsController
 )

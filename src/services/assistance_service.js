@@ -17,10 +17,18 @@ const getAssistanceById = async (id, includeSubject = false) => {
   }
 }
 
-const updateAssistanceStudents = async (assistanceId, assistances) => {
+const updateAssistanceStudents = async (assistanceId, data) => {
   try {
-    const newAssistances = await prisma.$transaction(
-      assistances.map(
+    const [assistance, students] = await prisma.$transaction([
+      prisma.assistance.update({
+        where: {
+          id: assistanceId
+        },
+        data: {
+          description: data.description
+        }
+      }),
+      ...data.assistances.map(
         assistance => prisma.studentAssistance.update({
           where: {
             student_id_assistance_id: {
@@ -33,8 +41,9 @@ const updateAssistanceStudents = async (assistanceId, assistances) => {
           }
         })
       )
-    )
-    return newAssistances
+    ])
+    assistance.students = students
+    return assistance
   } catch (e) {
     console.log(e)
     throw e

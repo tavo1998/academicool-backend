@@ -84,7 +84,30 @@ const getSubjectAssistances = async (subjectId, date) => {
         }
       },
       include: {
-        students: true
+        students: {
+          select: {
+            attended: true,
+            student: {
+              select: {
+                id: true,
+                first_name: true,
+                last_name: true
+              }
+            }
+          },
+          orderBy: [
+            {
+              student: {
+                first_name: 'asc'
+              }
+            },
+            {
+              student: {
+                last_name: 'asc'
+              }
+            }
+          ]
+        }
       }
     })
     return assistance
@@ -127,16 +150,6 @@ const postSubjectAssistance = async (subjectId, data) => {
     throw e
   }
 }
-
-// {
-//   description: "",
-//   assistances: [
-//     {
-//       student_id: '',
-//       attended: false
-//     }
-//   ]
-// }
 
 module.exports = {
   getSubjects,

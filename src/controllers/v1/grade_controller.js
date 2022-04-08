@@ -1,7 +1,6 @@
 const { getGradeStudents } = require('./../../services/grade_service')
 
 const getGradeStudentsController = async (req, res) => {
-  console.log(req.user)
   const { gradeId } = req.params
   try {
     const students = await getGradeStudents(parseInt(gradeId))

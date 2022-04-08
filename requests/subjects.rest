@@ -35,7 +35,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/v1/subjects/1/assistances?date=2022-04-07
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTM1OTY4MCwiZXhwIjoxNjQ5MzYwMjgwfQ.rTcjvyrDX9MmlP3NZPQMzKJHC_7uO4eMdiLVfEVzCg4
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTM3NDc1NywiZXhwIjoxNjQ5Mzc1MzU3fQ.3dHXwycIvt9rtVso00jIUvY7bL_PBywu7lbZmvz1_mo
 
 ###
 
