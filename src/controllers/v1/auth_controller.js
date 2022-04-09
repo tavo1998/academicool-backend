@@ -2,6 +2,7 @@ const { getConnectionUrl } = require('../../lib/google')
 const { createJWT } = require('../../lib/jwt')
 const { createOptionsCookie } = require('../../lib/cookies')
 const { Role } = require('@prisma/client')
+const res = require('express/lib/response')
 
 function roleRedirectUrl (role) {
   if (role === Role.ADMIN) return process.env.CLIENT_URL + '/dashboard/admin'
@@ -27,7 +28,13 @@ async function googleCallback (req, res) {
   }
 }
 
+async function signOut (req, res) {
+  res.clearCookie('user_auth_token')
+  return res.redirect(`${process.env.CLIENT_URL}/login`)
+}
+
 module.exports = {
   googleLogin,
-  googleCallback
+  googleCallback,
+  signOut
 }
