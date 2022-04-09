@@ -24,9 +24,11 @@ const getTeacherSubjects = async (teacherId) => {
   }
 }
 
-const getSubjectAssignments = async (subjectId) => {
+const getSubjectAssignments = async (subjectId, pagination) => {
   try {
     const assignments = prisma.assigment.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: parseInt(subjectId)
       },
@@ -41,9 +43,11 @@ const getSubjectAssignments = async (subjectId) => {
   }
 }
 
-const filterSubjectAssignmentsByTitle = (subjectId, title) => {
+const filterSubjectAssignmentsByTitle = (subjectId, title, pagination) => {
   try {
     const assignments = prisma.assigment.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: parseInt(subjectId),
         title: {
@@ -62,9 +66,11 @@ const filterSubjectAssignmentsByTitle = (subjectId, title) => {
   }
 }
 
-const getSubjectNotices = async (subjectId) => {
+const getSubjectNotices = async (subjectId, pagination) => {
   try {
     const notices = await prisma.notice.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: subjectId
       },
@@ -79,9 +85,11 @@ const getSubjectNotices = async (subjectId) => {
   }
 }
 
-const filterSubjectNoticesByTitle = async (subjectId, title) => {
+const filterSubjectNoticesByTitle = async (subjectId, title, pagination) => {
   try {
     const notices = await prisma.notice.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: subjectId,
         title: {

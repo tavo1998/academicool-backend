@@ -27,13 +27,13 @@ const getSubjectsController = async (req, res) => {
 }
 
 const getSubjectAssignmentsController = async (req, res) => {
-  const { title } = req.query
+  const { title, pagination } = req.query
   const { subjectId } = req.params
   let assignments
 
   try {
-    if (title) assignments = await filterSubjectAssignmentsByTitle(subjectId, title)
-    else assignments = await getSubjectAssignments(subjectId)
+    if (title) assignments = await filterSubjectAssignmentsByTitle(subjectId, title, pagination)
+    else assignments = await getSubjectAssignments(subjectId, pagination)
     return res.status(200).json({ data: assignments })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while processing the request' })
@@ -57,13 +57,13 @@ const postSubjectAssignmentsController = async (req, res) => {
 }
 
 const getSubjectNoticesController = async (req, res) => {
-  const { title } = req.query
+  const { title, pagination } = req.query
   const { subjectId } = req.params
   let notices
 
   try {
-    if (title) notices = await filterSubjectNoticesByTitle(parseInt(subjectId), title)
-    else notices = await getSubjectNotices(parseInt(subjectId))
+    if (title) notices = await filterSubjectNoticesByTitle(parseInt(subjectId), title, pagination)
+    else notices = await getSubjectNotices(parseInt(subjectId), pagination)
     return res.status(200).json({ data: notices })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while get records' })
