@@ -41,11 +41,53 @@ const getSubjectAssignments = async (subjectId) => {
   }
 }
 
+const filterSubjectAssignmentsByTitle = (subjectId, title) => {
+  try {
+    const assignments = prisma.assigment.findMany({
+      where: {
+        subject_id: parseInt(subjectId),
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return assignments
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 const getSubjectNotices = async (subjectId) => {
   try {
     const notices = await prisma.notice.findMany({
       where: {
         subject_id: subjectId
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return notices
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const filterSubjectNoticesByTitle = async (subjectId, title) => {
+  try {
+    const notices = await prisma.notice.findMany({
+      where: {
+        subject_id: subjectId,
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
       },
       orderBy: {
         id: 'desc'
@@ -158,5 +200,7 @@ module.exports = {
   getSubjectAssignments,
   getSubjectNotices,
   getSubjectAssistances,
-  postSubjectAssistance
+  postSubjectAssistance,
+  filterSubjectAssignmentsByTitle,
+  filterSubjectNoticesByTitle
 }
