@@ -15,6 +15,9 @@ const getTeacherSubjects = async (teacherId) => {
     const subjects = await prisma.subject.findMany({
       where: {
         teacher_id: teacherId
+      },
+      include: {
+        grade: true
       }
     })
     return subjects
