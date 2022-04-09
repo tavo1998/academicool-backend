@@ -1,4 +1,4 @@
-const { getUserById } = require('./../../services/user_service')
+const { getUserById, getUserStudents } = require('./../../services/user_service')
 
 async function getUserAuthenticated (req, res) {
   try {
@@ -9,6 +9,16 @@ async function getUserAuthenticated (req, res) {
   }
 }
 
+async function getUserStudentsController (req, res) {
+  try {
+    const students = await getUserStudents(req.user.id)
+    return res.status(200).json({ data: students })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while fetching records' })
+  }
+}
+
 module.exports = {
-  getUserAuthenticated
+  getUserAuthenticated,
+  getUserStudentsController
 }
