@@ -6,5 +6,6 @@ const router = Router()
 
 router.get('/google', authController.googleLogin)
 router.get('/google/callback', checkUserExist, authController.googleCallback)
+router.get('/google/sign-out', authController.signOut)
 
 module.exports = router

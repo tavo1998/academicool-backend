@@ -1,7 +1,16 @@
 const { Role } = require('@prisma/client')
 const { createAssignment } = require('../../services/assignment_service')
 const { createNotice } = require('../../services/notice_service')
-const { getSubjects, getTeacherSubjects, getSubjectAssignments, getSubjectNotices, getSubjectAssistances, postSubjectAssistance } = require('../../services/subject_service')
+const {
+  getSubjects,
+  getTeacherSubjects,
+  getSubjectAssignments,
+  getSubjectNotices,
+  getSubjectAssistances,
+  postSubjectAssistance,
+  filterSubjectAssignmentsByTitle,
+  filterSubjectNoticesByTitle
+} = require('../../services/subject_service')
 
 const getSubjectsController = async (req, res) => {
   let subjects
@@ -18,9 +27,13 @@ const getSubjectsController = async (req, res) => {
 }
 
 const getSubjectAssignmentsController = async (req, res) => {
+  const { title, pagination } = req.query
   const { subjectId } = req.params
+  let assignments
+
   try {
-    const assignments = await getSubjectAssignments(subjectId)
+    if (title) assignments = await filterSubjectAssignmentsByTitle(subjectId, title, pagination)
+    else assignments = await getSubjectAssignments(subjectId, pagination)
     return res.status(200).json({ data: assignments })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while processing the request' })
@@ -44,9 +57,13 @@ const postSubjectAssignmentsController = async (req, res) => {
 }
 
 const getSubjectNoticesController = async (req, res) => {
+  const { title, pagination } = req.query
   const { subjectId } = req.params
+  let notices
+
   try {
-    const notices = await getSubjectNotices(parseInt(subjectId))
+    if (title) notices = await filterSubjectNoticesByTitle(parseInt(subjectId), title, pagination)
+    else notices = await getSubjectNotices(parseInt(subjectId), pagination)
     return res.status(200).json({ data: notices })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while get records' })

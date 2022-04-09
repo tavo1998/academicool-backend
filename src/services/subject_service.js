@@ -15,6 +15,9 @@ const getTeacherSubjects = async (teacherId) => {
     const subjects = await prisma.subject.findMany({
       where: {
         teacher_id: teacherId
+      },
+      include: {
+        grade: true
       }
     })
     return subjects
@@ -24,9 +27,11 @@ const getTeacherSubjects = async (teacherId) => {
   }
 }
 
-const getSubjectAssignments = async (subjectId) => {
+const getSubjectAssignments = async (subjectId, pagination) => {
   try {
     const assignments = prisma.assigment.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: parseInt(subjectId)
       },
@@ -41,11 +46,59 @@ const getSubjectAssignments = async (subjectId) => {
   }
 }
 
-const getSubjectNotices = async (subjectId) => {
+const filterSubjectAssignmentsByTitle = (subjectId, title, pagination) => {
+  try {
+    const assignments = prisma.assigment.findMany({
+      skip: pagination * 4,
+      take: 4,
+      where: {
+        subject_id: parseInt(subjectId),
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return assignments
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const getSubjectNotices = async (subjectId, pagination) => {
   try {
     const notices = await prisma.notice.findMany({
+      skip: pagination * 4,
+      take: 4,
       where: {
         subject_id: subjectId
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return notices
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
+const filterSubjectNoticesByTitle = async (subjectId, title, pagination) => {
+  try {
+    const notices = await prisma.notice.findMany({
+      skip: pagination * 4,
+      take: 4,
+      where: {
+        subject_id: subjectId,
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
       },
       orderBy: {
         id: 'desc'
@@ -158,5 +211,7 @@ module.exports = {
   getSubjectAssignments,
   getSubjectNotices,
   getSubjectAssistances,
-  postSubjectAssistance
+  postSubjectAssistance,
+  filterSubjectAssignmentsByTitle,
+  filterSubjectNoticesByTitle
 }
