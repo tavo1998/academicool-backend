@@ -28,7 +28,33 @@ async function getUserById (id) {
   }
 }
 
+async function getUserStudents (userId) {
+  try {
+    const students = await prisma.student.findMany({
+      where: {
+        attendant_id: userId
+      },
+      include: {
+        grade: true
+      },
+      orderBy: [
+        {
+          first_name: 'asc'
+        },
+        {
+          last_name: 'asc'
+        }
+      ]
+    })
+    return students
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getUserByEmail,
-  getUserById
+  getUserById,
+  getUserStudents
 }

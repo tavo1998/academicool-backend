@@ -1,0 +1,17 @@
+GET http://localhost:5000/api/v1/students/1/subjects
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTU0MzExOSwiZXhwIjoxNjQ5NTQzNzE5fQ.Kdd5roJ0RM5J9m7Wy6ldCQLVv29oseRtznpbXWuA2A0
+
+###
+
+GET http://localhost:5000/api/v1/students/1/assignments?subject=1&pagination=1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyMTE5OCwiZXhwIjoxNjQ5NjIxNzk4fQ.EBKKYV_2gkU7kLPiR_-oVZSNMUCMxL2NOuuvsVbDIws
+
+###
+
+GET http://localhost:5000/api/v1/students/1/notices?subject=1&pagination=0&tile=
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyMTE5OCwiZXhwIjoxNjQ5NjIxNzk4fQ.EBKKYV_2gkU7kLPiR_-oVZSNMUCMxL2NOuuvsVbDIws
+
+###
+
+GET http://localhost:5000/api/v1/students/1/assistances?subject=1&date=2022-04-10
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyNjQ3NCwiZXhwIjoxNjQ5NjI3MDc0fQ.PeUKlsKb0UOyVEwyjxmHV9mEs44IVNGDskyAEAMWPo4

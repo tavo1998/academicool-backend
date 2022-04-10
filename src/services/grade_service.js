@@ -42,8 +42,23 @@ const isTeacherOfInstitution = () => {
 
 }
 
+const getGradeSubjects = async (gradeId) => {
+  try {
+    const subjects = await prisma.subject.findMany({
+      where: {
+        grade_id: gradeId
+      }
+    })
+    return subjects
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getGradeStudents,
   isTeacherOfInstitution,
-  getGradeById
+  getGradeById,
+  getGradeSubjects
 }
