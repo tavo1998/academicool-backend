@@ -1,3 +1,4 @@
+const { getStudentAssistance } = require('../../services/student_service')
 const { getSubjectAssignmentsWithStudentScore, getSubjectNotices } = require('../../services/subject_service')
 const { getGradeSubjects } = require('./../../services/grade_service')
 
@@ -33,8 +34,21 @@ const getStudentNoticesController = async (req, res) => {
   }
 }
 
+const getStudentAssistancesController = async (req, res) => {
+  const { subject, date } = req.query
+  const { studentId } = req.params
+
+  try {
+    const assistance = await getStudentAssistance(parseInt(studentId), parseInt(subject), date)
+    return res.status(200).json({ data: assistance })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while fetching records' })
+  }
+}
+
 module.exports = {
   getStudentSubjectsController,
   getStudentAssignmentsController,
-  getStudentNoticesController
+  getStudentNoticesController,
+  getStudentAssistancesController
 }
