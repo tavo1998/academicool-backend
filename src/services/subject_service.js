@@ -27,26 +27,7 @@ const getTeacherSubjects = async (teacherId) => {
   }
 }
 
-const getSubjectAssignments = async (subjectId, pagination) => {
-  try {
-    const assignments = prisma.assigment.findMany({
-      skip: pagination * 4,
-      take: 4,
-      where: {
-        subject_id: parseInt(subjectId)
-      },
-      orderBy: {
-        id: 'desc'
-      }
-    })
-    return assignments
-  } catch (e) {
-    console.log(e)
-    throw e
-  }
-}
-
-const filterSubjectAssignmentsByTitle = (subjectId, title, pagination) => {
+const getSubjectAssignments = async (subjectId, pagination, title) => {
   try {
     const assignments = prisma.assigment.findMany({
       skip: pagination * 4,
@@ -69,7 +50,7 @@ const filterSubjectAssignmentsByTitle = (subjectId, title, pagination) => {
   }
 }
 
-const getSubjectNotices = async (subjectId, pagination) => {
+const getSubjectNotices = async (subjectId, pagination, title) => {
   try {
     const notices = await prisma.notice.findMany({
       skip: pagination * 4,
@@ -77,28 +58,9 @@ const getSubjectNotices = async (subjectId, pagination) => {
       where: {
         subject_id: subjectId
       },
-      orderBy: {
-        id: 'desc'
-      }
-    })
-    return notices
-  } catch (e) {
-    console.log(e)
-    throw e
-  }
-}
-
-const filterSubjectNoticesByTitle = async (subjectId, title, pagination) => {
-  try {
-    const notices = await prisma.notice.findMany({
-      skip: pagination * 4,
-      take: 4,
-      where: {
-        subject_id: subjectId,
-        title: {
-          contains: title,
-          mode: 'insensitive'
-        }
+      title: {
+        contains: title,
+        mode: 'insensitive'
       },
       orderBy: {
         id: 'desc'
@@ -204,6 +166,39 @@ const postSubjectAssistance = async (subjectId, data) => {
   }
 }
 
+const getSubjectAssignmentsWithStudentScore = async (subjectId, studentId, pagination, title) => {
+  try {
+    const assignments = await prisma.assigment.findMany({
+      skip: pagination * 4,
+      take: 4,
+      where: {
+        subject_id: subjectId,
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
+      },
+      include: {
+        scores: {
+          where: {
+            student_id: studentId
+          },
+          select: {
+            score: true
+          }
+        }
+      },
+      orderBy: {
+        id: 'desc'
+      }
+    })
+    return assignments
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getSubjects,
   getTeacherSubjects,
@@ -212,6 +207,5 @@ module.exports = {
   getSubjectNotices,
   getSubjectAssistances,
   postSubjectAssistance,
-  filterSubjectAssignmentsByTitle,
-  filterSubjectNoticesByTitle
+  getSubjectAssignmentsWithStudentScore
 }

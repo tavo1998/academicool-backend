@@ -1,2 +1,7 @@
 GET http://localhost:5000/api/v1/students/1/subjects
 Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTU0MzExOSwiZXhwIjoxNjQ5NTQzNzE5fQ.Kdd5roJ0RM5J9m7Wy6ldCQLVv29oseRtznpbXWuA2A0
+
+###
+
+GET http://localhost:5000/api/v1/students/1/assignments?subject=1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYxNTY1MywiZXhwIjoxNjQ5NjE2MjUzfQ.GZvkZhjKmRokp2Ij4M0NVlidU6BTNLJwXz9uCmXvyP4
