@@ -22,8 +22,20 @@ router.get(
   checkIsAuthenticated,
   canGetStudentSubjects,
   query('pagination').isInt({ gt: -1 }).withMessage('Pagination must be greater than or equal to 0'),
+  query('subject').isInt({ gt: 0 }).withMessage('Subject ID must be greater than or equal to 1'),
   validateErrors,
   studentController.getStudentAssignmentsController
+)
+
+router.get(
+  '/:studentId/notices',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetStudentSubjects,
+  query('pagination').isInt({ gt: -1 }).withMessage('Pagination must be greater than or equal to 0'),
+  query('subject').isInt({ gt: 0 }).withMessage('Subject ID must be greater than or equal to 1'),
+  validateErrors,
+  studentController.getStudentNoticesController
 )
 
 module.exports = router

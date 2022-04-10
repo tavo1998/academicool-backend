@@ -3,5 +3,10 @@ Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIml
 
 ###
 
-GET http://localhost:5000/api/v1/students/1/assignments?subject=1
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYxNTY1MywiZXhwIjoxNjQ5NjE2MjUzfQ.GZvkZhjKmRokp2Ij4M0NVlidU6BTNLJwXz9uCmXvyP4
+GET http://localhost:5000/api/v1/students/1/assignments?subject=1&pagination=1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyMTE5OCwiZXhwIjoxNjQ5NjIxNzk4fQ.EBKKYV_2gkU7kLPiR_-oVZSNMUCMxL2NOuuvsVbDIws
+
+###
+
+GET http://localhost:5000/api/v1/students/1/notices?subject=1&pagination=0&tile=
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyMTE5OCwiZXhwIjoxNjQ5NjIxNzk4fQ.EBKKYV_2gkU7kLPiR_-oVZSNMUCMxL2NOuuvsVbDIws

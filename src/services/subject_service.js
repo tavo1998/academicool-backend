@@ -56,11 +56,11 @@ const getSubjectNotices = async (subjectId, pagination, title) => {
       skip: pagination * 4,
       take: 4,
       where: {
-        subject_id: subjectId
-      },
-      title: {
-        contains: title,
-        mode: 'insensitive'
+        subject_id: subjectId,
+        title: {
+          contains: title,
+          mode: 'insensitive'
+        }
       },
       orderBy: {
         id: 'desc'
