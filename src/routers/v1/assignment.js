@@ -6,6 +6,7 @@ const checkUserCookie = require('../../middlewares/check_user_cookie')
 const canUpdateAssignment = require('../../middlewares/can_update_assignment')
 const validateErrors = require('../../middlewares/validate_errors')
 const canQualifyAssignments = require('../../middlewares/can_qualify_assignment')
+const canDeleteAssignment = require('../../middlewares/can_delete_assignment')
 
 const router = Router()
 
@@ -19,6 +20,14 @@ router.put(
   body('delivery_date').isISO8601().notEmpty().optional(),
   validateErrors,
   assignmentController.updateAssignmentController
+)
+
+router.delete(
+  '/:assignmentId',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canDeleteAssignment,
+  assignmentController.deleteAssignmentController
 )
 
 router.post(

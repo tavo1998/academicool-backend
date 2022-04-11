@@ -17,6 +17,20 @@ const getAssignmentById = async (id, includeSubject = false) => {
   }
 }
 
+const deleteAssignmentById = async (id) => {
+  try {
+    const assignmentDeleted = await prisma.assigment.delete({
+      where: {
+        id
+      }
+    })
+    return assignmentDeleted
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 const createAssignment = async (assignment) => {
   try {
     const newAssignment = await prisma.assigment.create({
@@ -136,5 +150,6 @@ module.exports = {
   isAssignmentOfTeacher,
   qualifyAssignment,
   getAssignmentScores,
-  updateAssignmentScores
+  updateAssignmentScores,
+  deleteAssignmentById
 }
