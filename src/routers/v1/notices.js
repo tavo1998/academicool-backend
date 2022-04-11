@@ -5,6 +5,7 @@ const checkIsAuthenticated = require('../../middlewares/check_is_authenticated')
 const checkUserCookie = require('../../middlewares/check_user_cookie')
 const canUpdateNotice = require('../../middlewares/can_update_notice')
 const validateErrors = require('./../../middlewares/validate_errors')
+const canDeleteNotice = require('../../middlewares/can_delete_notice')
 
 const router = Router()
 
@@ -17,6 +18,14 @@ router.put(
   body('description').isLength({ max: 280 }).notEmpty().optional(),
   validateErrors,
   noticeController.updateNoticeController
+)
+
+router.delete(
+  '/:noticeId',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canDeleteNotice,
+  noticeController.deleteNoticeController
 )
 
 module.exports = router

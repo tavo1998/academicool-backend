@@ -44,6 +44,20 @@ const updateNotice = async (id, data) => {
   }
 }
 
+const deleteNoticeById = async (id) => {
+  try {
+    const noticeDeleted = await prisma.notice.delete({
+      where: {
+        id
+      }
+    })
+    return noticeDeleted
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 const isNoticeOfTeacher = async (noticeId, userId) => {
   try {
     const notice = await getNoticeById(noticeId, true)
@@ -59,5 +73,6 @@ module.exports = {
   createNotice,
   updateNotice,
   getNoticeById,
-  isNoticeOfTeacher
+  isNoticeOfTeacher,
+  deleteNoticeById
 }

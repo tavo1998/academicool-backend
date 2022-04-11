@@ -37,5 +37,5 @@ Content-Type: application/json
 ]
 
 ###
-DELETE http://localhost:5000/api/v1/assignments/1
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTY5MjQ2NywiZXhwIjoxNjQ5NjkzMDY3fQ.ijNFREm4nKopJfDqAqmcSMuoOBAUlfOlLCWhkuzKMos
+DELETE http://localhost:5000/api/v1/assignments/2
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTY5NDYxMywiZXhwIjoxNjQ5Njk1MjEzfQ.oYXeIZ6eNYOhKgleFi0KzsKw9wwnt0-ANdOW7wMtOwY

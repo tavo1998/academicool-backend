@@ -4,12 +4,8 @@ const { isAssignmentOfTeacher } = require('../services/assignment_service')
 const canDeleteAssignment = async (req, res, next) => {
   const { assignmentId } = req.params
 
-  try {
-    if (isTeacher(req.user.role) && isAssignmentOfTeacher(parseInt(assignmentId), req.user.id)) return next()
-    return res.status(403).json({ message: 'Unauthorized user' })
-  } catch (e) {
-    return res.status(500).json({ message: 'An error occurred while processing the request' })
-  }
+  if (isTeacher(req.user.role) && await isAssignmentOfTeacher(parseInt(assignmentId), req.user.id)) return next()
+  return res.status(403).json({ message: 'Unauthorized user' })
 }
 
 module.exports = canDeleteAssignment
