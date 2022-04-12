@@ -169,6 +169,7 @@ model Score {
   assigment_id Int
   student Student @relation(fields: [student_id], references: [id])
   student_id Int
+  commentary String? @db.VarChar(100)
   score Decimal
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt

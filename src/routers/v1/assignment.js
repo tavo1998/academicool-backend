@@ -38,6 +38,7 @@ router.post(
   body().isArray(),
   body('*.student_id').isInt(),
   body('*.value').isDecimal({ force_decimal: false, decimal_digits: 1 }).isFloat({ min: 0, max: 5 }),
+  body('*.commentary').isLength({ max: 100 }).optional(),
   validateErrors,
   assignmentController.qualifyAssignmentController
 )
@@ -50,6 +51,7 @@ router.put(
   body().isArray(),
   body('*.student_id').isInt(),
   body('*.value').isDecimal({ force_decimal: false, decimal_digits: 1 }).isFloat({ min: 0, max: 5 }),
+  body('*.commentary').isLength({ max: 100 }).optional(),
   validateErrors,
   assignmentController.updateAssignmentScoresController
 )
