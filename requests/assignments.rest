@@ -8,20 +8,21 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:5000/api/v1/assignments/2/qualify
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTI3NjI5OSwiZXhwIjoxNjQ5Mjc2ODk5fQ.ejFH0l6uxgKo37HbrChIV2wR6-JviQQPcR315hLF_AA
+POST http://localhost:5000/api/v1/assignments/1/scores
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTcyMTcxMiwiZXhwIjoxNjQ5NzIyMzEyfQ.nv9agV1smd130YAp_VT8AWVMhoJdJjDt-tzBgJtt5FY
 Content-Type: application/json
 
 [
   {
     "student_id": 1,
-    "value": 1
+    "value": 1,
+    "commentary": "probando"
   }
 ]
 
 ###
 GET http://localhost:5000/api/v1/assignments/1/scores
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTI3OTY0MSwiZXhwIjoxNjQ5MjgwMjQxfQ.4-2SPw047vQy9QBIcZaK8pmaEoW41FOkTNnOLW0Ko-M
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTcyNjc3MywiZXhwIjoxNjQ5NzI3MzczfQ.UAyAl6q0Zlzx_1ArsH6ORAfTI-ixS638J3VIxSCyzhg
 
 ###
 

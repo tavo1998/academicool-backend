@@ -72,6 +72,7 @@ const isAssignmentOfTeacher = async (assignmentId, userId) => {
 const transformScoresToPost = (scores) => {
   const transformedScores = scores.map((score) => ({
     score: score.value,
+    commentary: score.commentary,
     student: {
       connect: {
         id: score.student_id
@@ -133,7 +134,10 @@ const updateAssignmentScores = (assigmentId, scores) => {
               student_id: score.student_id
             }
           },
-          data: { score: score.value }
+          data: {
+            score: score.value,
+            commentary: score.commentary
+          }
         }))
     )
     return updatedScores

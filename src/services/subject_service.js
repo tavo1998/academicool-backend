@@ -184,7 +184,8 @@ const getSubjectAssignmentsWithStudentScore = async (subjectId, studentId, pagin
             student_id: studentId
           },
           select: {
-            score: true
+            score: true,
+            commentary: true
           }
         }
       },
