@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { body, query } = require('express-validator')
+const { AssignmentType } = require('@prisma/client')
 const canGetSubjects = require('../../middlewares/can_get_subjects')
 const checkIsAuthenticated = require('../../middlewares/check_is_authenticated')
 const checkUserCookie = require('../../middlewares/check_user_cookie')
@@ -34,6 +35,13 @@ router.post(
   canGetTeacherAssignments,
   body('title').isLength({ max: 100 }).notEmpty(),
   body('description').isLength({ max: 280 }).notEmpty(),
+  body('assignment_type').isIn([
+    AssignmentType.EXAM,
+    AssignmentType.HOMEWORK,
+    AssignmentType.LECTURE,
+    AssignmentType.PARTICIPATION,
+    AssignmentType.WORKSHOP
+  ]),
   body('delivery_date').isISO8601(),
   validateErrors,
   subjectController.postSubjectAssignmentsController

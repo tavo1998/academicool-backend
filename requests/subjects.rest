@@ -8,13 +8,14 @@ Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIml
 ###
 
 POST http://localhost:5000/api/v1/subjects/1/assignments
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTEyMjM5NSwiZXhwIjoxNjQ5MTIyOTk1fQ.UlzEyAYGP7xN3QKaJNebKS4hkGxUOlIg2ptTilcieVI
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTc4MDY2OSwiZXhwIjoxNjQ5NzgxMjY5fQ.IpCCu5PR8yl6drNWDETZ2Q5Ue--_OQRdU5afkZiKNKM
 Content-Type: application/json
 
 {
   "title": "Esta es una asignación",
   "description": "Esta es la descripción de la primera asignación",
-  "delivery_date": "2022-04-04T00:00:00.000Z"
+  "delivery_date": "2022-04-04T00:00:00.000Z",
+  "assignment_type": "EXAM"
 }
 
 ###

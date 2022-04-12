@@ -140,23 +140,13 @@ model Enrollment {
   @@id([subject_id, student_id])
 }
 
-model AssigmentType {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(50)
-  percentage Int
-  assigments Assigment[]
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-}
-
 model Assigment {
   id Int @id @default(autoincrement())
   title String @db.VarChar(100)
   description String @db.VarChar(280)
   delivery_date DateTime @db.Date
   is_qualified Boolean @default(false)
-  assigment_type AssigmentType? @relation(fields: [assigment_type_id], references: [id])
-  assigment_type_id Int?
+  assignment_type AssignmentType
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   scores Score[]
@@ -180,4 +170,12 @@ enum Role {
   ATTENDANT
   TEACHER
   ADMIN
+}
+
+enum AssignmentType {
+  EXAM
+  HOMEWORK
+  WORKSHOP
+  LECTURE
+  PARTICIPATION
 }
