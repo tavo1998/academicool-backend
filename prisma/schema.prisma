@@ -21,7 +21,7 @@ model Institution {
   students Student[]
   grades Grade[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model User {
@@ -30,16 +30,16 @@ model User {
   first_name String @db.VarChar(50)
   last_name String @db.VarChar(50)
   email String @db.VarChar(100) @unique
-  phone_number String @db.VarChar(50)
-  address String @db.VarChar(100)
-  gender String @db.VarChar(50)
+  phone_number String? @db.VarChar(50)
+  address String? @db.VarChar(100)
+  is_active Boolean @default(true)
   subjects Subject[]
   students Student[]
   role Role
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Grade {
@@ -50,18 +50,18 @@ model Grade {
   subjects Subject[]
   students Student[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Subject {
   id Int @id @default(autoincrement())
   name String @db.VarChar(100)
-  description String @db.VarChar(280)
-  subject_date DateTime @db.Date
+  description String? @db.VarChar(280)
+  is_active Boolean @default(true)
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
-  teacher User @relation(fields: [teacher_id], references: [id])
-  teacher_id Int
+  teacher User? @relation(fields: [teacher_id], references: [id])
+  teacher_id Int?
   grade Grade @relation(fields: [grade_id], references: [id])
   grade_id Int
   assistance Assistance[]
@@ -69,7 +69,7 @@ model Subject {
   enrollments Enrollment[]
   assigments Assigment[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Student {
@@ -78,19 +78,20 @@ model Student {
   first_name String @db.VarChar(50)
   last_name String @db.VarChar(50)
   email String @db.VarChar(100) @unique
-  phone_number String @db.VarChar(50)
-  address String @db.VarChar(100)
+  phone_number String? @db.VarChar(50)
+  address String? @db.VarChar(100)
+  is_active Boolean @default(true)
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
   attendant User @relation(fields: [attendant_id], references: [id])
   attendant_id Int
-  grade Grade @relation(fields: [grade_id], references: [id])
-  grade_id Int
+  grade Grade? @relation(fields: [grade_id], references: [id])
+  grade_id Int?
   assistances StudentAssistance[]
   enrollments Enrollment[]
   scores Score[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Assistance {
@@ -101,7 +102,7 @@ model Assistance {
   subject_id Int
   students StudentAssistance[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 
   @@unique([date, subject_id])
 }
@@ -113,7 +114,7 @@ model StudentAssistance {
   assistance_id Int
   attended Boolean
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 
   @@id([student_id, assistance_id])
 }
@@ -122,10 +123,11 @@ model Notice {
   id Int @id @default(autoincrement())
   title String @db.VarChar(100)
   description String @db.VarChar(280)
+  is_active Boolean @default(true)
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Enrollment {
@@ -135,7 +137,7 @@ model Enrollment {
   student_id Int
   enrollment_date DateTime @default(now())
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
 
   @@id([subject_id, student_id])
 }
@@ -146,12 +148,13 @@ model Assigment {
   description String @db.VarChar(280)
   delivery_date DateTime @db.Date
   is_qualified Boolean @default(false)
+  is_active Boolean @default(true)
   assignment_type AssignmentType
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   scores Score[]
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt   
+  updated_at DateTime @updatedAt @default(now())
 }
 
 model Score {
@@ -162,14 +165,13 @@ model Score {
   commentary String? @db.VarChar(100)
   score Decimal
   created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  updated_at DateTime @updatedAt @default(now())
   @@id([assigment_id, student_id])
 }
 
 enum Role {
   ATTENDANT
   TEACHER
-  ADMIN
 }
 
 enum AssignmentType {
