@@ -25,7 +25,7 @@ router.delete(
   checkUserCookie,
   checkIsAuthenticated,
   canDeleteNotice,
-  noticeController.deleteNoticeController
+  noticeController.desactivateNoticeController
 )
 
 module.exports = router

@@ -44,11 +44,14 @@ const updateNotice = async (id, data) => {
   }
 }
 
-const deleteNoticeById = async (id) => {
+const desactivateNoticeById = async (id) => {
   try {
-    const noticeDeleted = await prisma.notice.delete({
+    const noticeDeleted = await prisma.notice.update({
       where: {
         id
+      },
+      data: {
+        is_active: false
       }
     })
     return noticeDeleted
@@ -74,5 +77,5 @@ module.exports = {
   updateNotice,
   getNoticeById,
   isNoticeOfTeacher,
-  deleteNoticeById
+  desactivateNoticeById
 }

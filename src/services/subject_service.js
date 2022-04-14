@@ -1,20 +1,11 @@
 const prisma = require('./../config/database')
 
-const getSubjects = async () => {
-  try {
-    const subjects = await prisma.subject.findMany()
-    return subjects
-  } catch (e) {
-    console.log(e)
-    throw e
-  }
-}
-
 const getTeacherSubjects = async (teacherId) => {
   try {
     const subjects = await prisma.subject.findMany({
       where: {
-        teacher_id: teacherId
+        teacher_id: teacherId,
+        is_active: true
       },
       include: {
         grade: true
@@ -34,6 +25,7 @@ const getSubjectAssignments = async (subjectId, pagination, title) => {
       take: 4,
       where: {
         subject_id: parseInt(subjectId),
+        is_active: true,
         title: {
           contains: title,
           mode: 'insensitive'
@@ -57,6 +49,7 @@ const getSubjectNotices = async (subjectId, pagination, title) => {
       take: 4,
       where: {
         subject_id: subjectId,
+        is_active: true,
         title: {
           contains: title,
           mode: 'insensitive'
@@ -173,6 +166,7 @@ const getSubjectAssignmentsWithStudentScore = async (subjectId, studentId, pagin
       take: 4,
       where: {
         subject_id: subjectId,
+        is_active: true,
         title: {
           contains: title,
           mode: 'insensitive'
@@ -201,7 +195,6 @@ const getSubjectAssignmentsWithStudentScore = async (subjectId, studentId, pagin
 }
 
 module.exports = {
-  getSubjects,
   getTeacherSubjects,
   isTeacherOfSubject,
   getSubjectAssignments,

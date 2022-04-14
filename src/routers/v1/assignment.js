@@ -27,7 +27,7 @@ router.delete(
   checkUserCookie,
   checkIsAuthenticated,
   canDeleteAssignment,
-  assignmentController.deleteAssignmentController
+  assignmentController.desactivateAssignmentController
 )
 
 router.post(

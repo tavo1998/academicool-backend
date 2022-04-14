@@ -1,4 +1,4 @@
-const { updateAssignment, qualifyAssignment, getAssignmentScores, updateAssignmentScores, deleteAssignmentById } = require('../../services/assignment_service')
+const { updateAssignment, qualifyAssignment, getAssignmentScores, updateAssignmentScores, desactivateAssignmentById } = require('../../services/assignment_service')
 
 const updateAssignmentController = async (req, res) => {
   const { assignmentId } = req.params
@@ -11,11 +11,11 @@ const updateAssignmentController = async (req, res) => {
   }
 }
 
-const deleteAssignmentController = async (req, res) => {
+const desactivateAssignmentController = async (req, res) => {
   const { assignmentId } = req.params
 
   try {
-    const assignment = await deleteAssignmentById(parseInt(assignmentId))
+    const assignment = await desactivateAssignmentById(parseInt(assignmentId))
     return res.status(200).json({ data: assignment })
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while deleting record' })
@@ -58,5 +58,5 @@ module.exports = {
   qualifyAssignmentController,
   getAssignmentScoresController,
   updateAssignmentScoresController,
-  deleteAssignmentController
+  desactivateAssignmentController
 }
