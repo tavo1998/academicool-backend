@@ -2,10 +2,8 @@ const { getConnectionUrl } = require('../../lib/google')
 const { createJWT } = require('../../lib/jwt')
 const { createOptionsCookie } = require('../../lib/cookies')
 const { Role } = require('@prisma/client')
-const res = require('express/lib/response')
 
 function roleRedirectUrl (role) {
-  if (role === Role.ADMIN) return process.env.CLIENT_URL + '/dashboard/admin'
   if (role === Role.ATTENDANT) return process.env.CLIENT_URL + '/dashboard/attendant'
   if (role === Role.TEACHER) return process.env.CLIENT_URL + '/dashboard/teacher'
 }
