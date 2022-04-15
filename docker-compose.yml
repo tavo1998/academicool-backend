@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - TZ=America/Bogota
+  backend:
+    build: .
+    env_file:
+      - ./.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
