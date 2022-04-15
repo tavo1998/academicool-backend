@@ -82,8 +82,8 @@ model Student {
   is_active Boolean @default(true)
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
-  attendant User @relation(fields: [attendant_id], references: [id])
-  attendant_id Int
+  attendant User? @relation(fields: [attendant_id], references: [id])
+  attendant_id Int?
   grade Grade? @relation(fields: [grade_id], references: [id])
   grade_id Int?
   assistances StudentAssistance[]

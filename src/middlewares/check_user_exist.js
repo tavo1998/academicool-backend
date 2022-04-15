@@ -9,7 +9,7 @@ async function checkUserExist (req, res, next) {
     const tokens = await getGoogleTokens(code)
     const userInfo = await getUserDetails(tokens)
     const user = await getUserByEmail(userInfo.email)
-    if (!user) {
+    if (!user || !user.is_active) {
       return res.redirect(`${process.env.CLIENT_URL}/login?error=${errorMessage}`)
     }
     req.userInfo = userInfo
