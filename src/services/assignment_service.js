@@ -117,7 +117,19 @@ const getAssignmentScores = async (assignmentId, includeStudent = false, include
       include: {
         student: includeStudent,
         assigment: includeAssignment
-      }
+      },
+      orderBy: [
+        {
+          student: {
+            first_name: 'asc'
+          }
+        },
+        {
+          student: {
+            last_name: 'asc'
+          }
+        }
+      ]
     })
     return scores
   } catch (e) {
