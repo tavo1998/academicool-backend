@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.14.2"
+  },
   "scripts": {
     "start": "prisma generate && prisma migrate deploy && node ./src/index.js",
     "dev": "prisma generate && prisma migrate dev && nodemon ./src/index.js",
