@@ -35,7 +35,11 @@ async function getUserStudents (userId) {
         attendant_id: userId
       },
       include: {
-        grade: true,
+        grade: {
+          include: {
+            director: true
+          }
+        },
         institution: true
       },
       orderBy: [

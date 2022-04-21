@@ -33,6 +33,7 @@ model User {
   phone_number String? @db.VarChar(50)
   address String? @db.VarChar(100)
   is_active Boolean @default(true)
+  grade Grade?
   subjects Subject[]
   students Student[]
   role Role
@@ -45,6 +46,8 @@ model User {
 model Grade {
   id Int @id @default(autoincrement())
   name String @db.VarChar(50)
+  director User? @relation(fields: [director_id], references: [id])
+  director_id Int?
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
   subjects Subject[]
