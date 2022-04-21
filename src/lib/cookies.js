@@ -1,7 +1,7 @@
 function createOptionsCookie (minutes) {
   return {
     httpOnly: true,
-    domain: '.gustavopinto.xyz',
+    domain: process.env.COOKIE_DOMAIN || 'localhost',
     expires: new Date(Date.now() + (minutes * 60000))
   }
 }

@@ -27,7 +27,7 @@ async function googleCallback (req, res) {
 }
 
 async function signOut (req, res) {
-  res.clearCookie('user_auth_token', { domain: '.gustavopinto.xyz' })
+  res.clearCookie('user_auth_token', { domain: process.env.COOKIE_DOMAIN || 'localhost' })
   return res.redirect(`${process.env.CLIENT_URL}/login`)
 }
 

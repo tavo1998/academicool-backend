@@ -141,7 +141,7 @@ const postSubjectAssistance = async (subjectId, data) => {
     const assistance = await prisma.assistance.create({
       data: {
         description: data.description,
-        date: new Date(),
+        date: data.date,
         subject: {
           connect: {
             id: subjectId
