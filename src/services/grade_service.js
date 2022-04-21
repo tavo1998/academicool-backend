@@ -44,6 +44,9 @@ const getGradeSubjects = async (gradeId) => {
       where: {
         grade_id: gradeId,
         is_active: true
+      },
+      include: {
+        teacher: true
       }
     })
     return subjects
