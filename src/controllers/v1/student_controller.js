@@ -1,4 +1,4 @@
-const { getStudentAssistance } = require('../../services/student_service')
+const { getStudentAssistance, getSubjectScoreAverage } = require('../../services/student_service')
 const { getSubjectAssignmentsWithStudentScore, getSubjectNotices } = require('../../services/subject_service')
 const { getGradeSubjects } = require('./../../services/grade_service')
 
@@ -46,9 +46,22 @@ const getStudentAssistancesController = async (req, res) => {
   }
 }
 
+const getSubjectScoreAverageController = async (req, res) => {
+  const { subject } = req.query
+  const { studentId } = req.params
+
+  try {
+    const averages = await getSubjectScoreAverage(parseInt(studentId), parseInt(subject))
+    return res.status(200).json({ data: averages })
+  } catch (e) {
+    return res.status(500).json({ error: 'An error has occurred while calculating averages' })
+  }
+}
+
 module.exports = {
   getStudentSubjectsController,
   getStudentAssignmentsController,
   getStudentNoticesController,
-  getStudentAssistancesController
+  getStudentAssistancesController,
+  getSubjectScoreAverageController
 }
