@@ -59,4 +59,14 @@ router.get(
   studentController.getSubjectScoreAverageController
 )
 
+router.get(
+  '/:studentId/assistance-score',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetStudentSubjects,
+  query('subject').isInt({ gt: 0 }).withMessage('subject ID must be greater than or equal to 1'),
+  validateErrors,
+  studentController.getSubjectAssistanceScoreController
+)
+
 module.exports = router

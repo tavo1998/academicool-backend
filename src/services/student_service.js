@@ -65,8 +65,40 @@ const getSubjectScoreAverage = async (studentId, subjectId) => {
   }
 }
 
+const getSubjectAssistanceScore = async (studentId, subjectId) => {
+  const assistanceScore = {}
+
+  try {
+    for (const attended of [true, false]) {
+      const aggregation = await prisma.studentAssistance.aggregate({
+        _count: {
+          attended: true
+        },
+        where: {
+          attended: attended,
+          student: {
+            id: studentId
+          },
+          assistance: {
+            is_active: true,
+            subject_id: subjectId
+          }
+        }
+      })
+      if (attended) assistanceScore.attended = aggregation._count.attended
+      assistanceScore.notAttended = aggregation._count.attended
+    }
+
+    return assistanceScore
+  } catch (e) {
+    console.log(e)
+    throw e
+  }
+}
+
 module.exports = {
   getStudentById,
   getStudentAssistance,
-  getSubjectScoreAverage
+  getSubjectScoreAverage,
+  getSubjectAssistanceScore
 }
