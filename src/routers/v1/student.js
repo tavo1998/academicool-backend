@@ -43,10 +43,30 @@ router.get(
   checkUserCookie,
   checkIsAuthenticated,
   canGetStudentSubjects,
-  query('subject').isInt({ gt: 0 }).withMessage('ubject ID must be greater than or equal to 1'),
+  query('subject').isInt({ gt: 0 }).withMessage('subject ID must be greater than or equal to 1'),
   query('date').isISO8601().withMessage('Date must be in ISO8601 format'),
   validateErrors,
   studentController.getStudentAssistancesController
+)
+
+router.get(
+  '/:studentId/score-average',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetStudentSubjects,
+  query('subject').isInt({ gt: 0 }).withMessage('subject ID must be greater than or equal to 1'),
+  validateErrors,
+  studentController.getSubjectScoreAverageController
+)
+
+router.get(
+  '/:studentId/assistance-score',
+  checkUserCookie,
+  checkIsAuthenticated,
+  canGetStudentSubjects,
+  query('subject').isInt({ gt: 0 }).withMessage('subject ID must be greater than or equal to 1'),
+  validateErrors,
+  studentController.getSubjectAssistanceScoreController
 )
 
 module.exports = router

@@ -15,3 +15,13 @@ Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIml
 
 GET http://localhost:5000/api/v1/students/1/assistances?subject=1&date=2022-04-10
 Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTYyNjQ3NCwiZXhwIjoxNjQ5NjI3MDc0fQ.PeUKlsKb0UOyVEwyjxmHV9mEs44IVNGDskyAEAMWPo4
+
+###
+
+GET http://localhost:5000/api/v1/students/1/score-average?subject=1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY1MDY2MDAwMywiZXhwIjoxNjUwNjYwNjAzfQ.xO377f9W5fCsJ_CTRFbH7WhggZTAs_JMZYaC1DI9ZZM
+
+###
+
+GET http://localhost:5000/api/v1/students/1/assistance-score?subject=1
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY1MDczMjIyMCwiZXhwIjoxNjUwNzMyODIwfQ.WLyEMTA4GFjDTJdzaRxn27S2BNlfJZkY-5dnYo8-QKA

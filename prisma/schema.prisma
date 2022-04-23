@@ -98,7 +98,8 @@ model Student {
 model Assistance {
   id Int @id @default(autoincrement())
   description String @db.VarChar(280)
-  date DateTime @db.Date @default(now())
+  date DateTime @db.Date
+  is_active Boolean @default(true)
   subject Subject @relation(fields: [subject_id], references: [id])
   subject_id Int
   students StudentAssistance[]
