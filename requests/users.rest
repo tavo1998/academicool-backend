@@ -4,3 +4,14 @@ Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIml
 ###
 GET http://localhost:5000/api/v1/users/students
 Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY0OTU0MTExMSwiZXhwIjoxNjQ5NTQxNzExfQ.G8hgOinHxUi-s7H88cL1MNRtW_nhJ3wih7BK0Q9eBJE
+
+###
+
+POST http://localhost:5000/api/v1/users/support-email
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY1MDkwODgwMywiZXhwIjoxNjUwOTA5NDAzfQ.oEToAw3FJ7jt6weT_puwAQGw80J32VlY57QvG7kgvCM
+Content-Type: application/json
+
+{
+  "title": "No puedo crear un comunicado",
+  "description": "Al momento de presionar el botón de crear comunicado, no me aparece el formulario"
+}
