@@ -8,7 +8,7 @@ Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIml
 ###
 
 POST http://localhost:5000/api/v1/users/support-email
-Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImlhdCI6MTY1MDkwODgwMywiZXhwIjoxNjUwOTA5NDAzfQ.oEToAw3FJ7jt6weT_puwAQGw80J32VlY57QvG7kgvCM
+Cookie: user_auth_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MDkxMzI4MSwiZXhwIjoxNjUwOTEzODgxfQ.YLgqJPdEhkyXEDgMDFABZsRKSWFDUf3ygd8EHNPq1iE
 Content-Type: application/json
 
 {
