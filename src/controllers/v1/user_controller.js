@@ -21,7 +21,7 @@ async function getUserStudentsController (req, res) {
 async function sendSupportEmailController (req, res) {
   try {
     await sendSupportEmail(req.body, req.user)
-    return res.status(204).end()
+    return res.status(204).json({})
   } catch (e) {
     return res.status(500).json({ error: 'An error has occurred while fetching records' })
   }
