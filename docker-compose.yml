@@ -1,15 +1,18 @@
 version: "3.9"
 services:
-  database:
+  db:
     image: postgres
+    restart: always
+    container_name: pgdatabase
     environment:
-      - POSTGRES_PASSWORD=password
-      - TZ=America/Bogota
-  backend:
-    build: .
-    env_file:
-      - ./.env
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=dev
     ports:
-      - "5000:5000"
-    depends_on:
-      - database
+      - '5432:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+
+volumes:
+  pgdata:
+    external: true

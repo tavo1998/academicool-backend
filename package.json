@@ -7,6 +7,9 @@
     "node": "16.14.2"
   },
   "scripts": {
+    "docker:db:test-up": "docker-compose -f docker-compose.test.yml up -d",
+    "docker:db:dev-up": "docker-compose up -d",
+    "docker:db:down": "docker-compose down",
     "start": "prisma generate && prisma migrate deploy && node ./src/index.js",
     "dev": "prisma generate && prisma migrate dev && nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
