@@ -7,12 +7,14 @@
     "node": "16.14.2"
   },
   "scripts": {
-    "docker:db:test-up": "docker-compose -f docker-compose.test.yml up -d",
-    "docker:db:dev-up": "docker-compose up -d",
+    "docker:db:test": "docker-compose -f docker-compose.test.yml up -d",
+    "docker:db:dev": "docker-compose up -d",
     "docker:db:down": "docker-compose down",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:deploy": "npx prisma migrate deploy",
     "start": "prisma generate && prisma migrate deploy && node ./src/index.js",
     "dev": "prisma generate && prisma migrate dev && nodemon ./src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
   },
   "repository": {
     "type": "git",
@@ -38,11 +40,19 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "jest": "^28.0.2",
     "nodemon": "^1.11.1",
     "prisma": "^3.11.0",
-    "standard": "^16.0.4"
+    "standard": "^16.0.4",
+    "supertest": "^6.2.3"
   },
   "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json",
+    "env": {
+      "jest": true
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

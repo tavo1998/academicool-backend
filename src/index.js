@@ -31,6 +31,11 @@ app.use('/api/v1/assistances', assistanceRouterV1)
 app.use('/api/v1/students', studentRouterV1)
 app.use('/api/v1/users', userRouterV1)
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log('Server running')
 })
+
+module.exports = {
+  app,
+  server
+}
