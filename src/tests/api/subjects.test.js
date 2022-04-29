@@ -1,7 +1,7 @@
 const {
   api,
   createTestData,
-  teacherData,
+  subjectData,
   deleteTestData
 } = require('../test_data')
 const { server } = require('./../../index')
@@ -13,25 +13,29 @@ beforeAll(async () => {
   data = await createTestData()
 })
 
-describe('GET /api/v1/users/me', () => {
+describe('GET /api/v1/subjects', () => {
   test('responds with unauthenticated user', async () => {
     const response = await api
-      .get('/api/v1/users/me')
+      .get('/api/v1/subjects')
       .expect(401)
       .expect('Content-Type', /json/)
 
     expect(response.body).toEqual({ message: 'Unauthenticated user' })
   })
 
-  test('responds with user info', async () => {
+  test('teacher has one subject assigned', async () => {
     const token = createJWT({ userId: data.teacher.id })
     const response = await api
-      .get('/api/v1/users/me')
+      .get('/api/v1/subjects')
       .set('Cookie', `user_auth_token=${token}`)
       .expect(200)
       .expect('Content-Type', /json/)
 
-    expect(response.body).toMatchObject(teacherData)
+    expect(response.body.data).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining(subjectData)
+      ])
+    )
   })
 })
 

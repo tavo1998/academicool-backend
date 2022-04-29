@@ -14,7 +14,7 @@
     "migrate:deploy": "npx prisma migrate deploy",
     "start": "prisma generate && prisma migrate deploy && node ./src/index.js",
     "dev": "prisma generate && prisma migrate dev && nodemon ./src/index.js",
-    "test": "jest --verbose"
+    "test": "jest --verbose -i"
   },
   "repository": {
     "type": "git",
