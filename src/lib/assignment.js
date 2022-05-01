@@ -5,7 +5,9 @@ const ASSIGNMENT_TYPE_LIST = [
   AssignmentType.HOMEWORK,
   AssignmentType.LECTURE,
   AssignmentType.PARTICIPATION,
-  AssignmentType.WORKSHOP
+  AssignmentType.WORKSHOP,
+  AssignmentType.QUIZ,
+  AssignmentType.PROJECT
 ]
 
 module.exports = {

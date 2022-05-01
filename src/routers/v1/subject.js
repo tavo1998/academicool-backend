@@ -40,7 +40,9 @@ router.post(
     AssignmentType.HOMEWORK,
     AssignmentType.LECTURE,
     AssignmentType.PARTICIPATION,
-    AssignmentType.WORKSHOP
+    AssignmentType.WORKSHOP,
+    AssignmentType.QUIZ,
+    AssignmentType.PROJECT
   ]),
   body('delivery_date').isISO8601(),
   validateErrors,
