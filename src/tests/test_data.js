@@ -131,6 +131,7 @@ const createTestData = async () => {
 }
 
 const deleteTestData = async () => {
+  await prisma.assigment.deleteMany({})
   await prisma.subject.deleteMany({})
   await prisma.student.deleteMany({})
   await prisma.user.deleteMany({})
