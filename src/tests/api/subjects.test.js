@@ -2,9 +2,9 @@ const {
   api,
   createTestData,
   subjectData,
-  deleteTestData
+  deleteTestData,
+  assignmentHomeworkData
 } = require('../test_data')
-const { AssignmentType } = require('@prisma/client')
 const { server } = require('./../../index')
 const { createJWT } = require('./../../lib/jwt')
 
@@ -64,12 +64,7 @@ describe('POST /api/v1/subjects/:subjectId/assignments', () => {
     await api
       .post(`/api/v1/subjects/${data.subject.id}/assignments`)
       .set('Cookie', `user_auth_token=${token}`)
-      .send({
-        title: 'Assignment 1',
-        description: 'Assignment 1',
-        assignment_type: AssignmentType.HOMEWORK,
-        delivery_date: new Date('2022-05-01')
-      })
+      .send(assignmentHomeworkData)
       .expect(201)
       .expect('Content-Type', /json/)
   })

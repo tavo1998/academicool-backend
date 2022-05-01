@@ -1,4 +1,5 @@
 const { app } = require('./../index')
+const { AssignmentType } = require('@prisma/client')
 const request = require('supertest')
 const prisma = require('./../config/database')
 
@@ -39,6 +40,14 @@ const studentData = {
   first_name: 'Pablo',
   last_name: 'Gomez',
   email: 'Pablo@Gomez.com'
+}
+
+const assignmentHomeworkData = {
+  title: 'Assignment 1',
+  description: 'Assignment',
+  assignment_type: AssignmentType.HOMEWORK,
+  delivery_date: new Date('2022-05-20')
+
 }
 
 const createTestData = async () => {
@@ -148,5 +157,6 @@ module.exports = {
   teacherData,
   subjectData,
   gradeData,
-  attendantData
+  attendantData,
+  assignmentHomeworkData
 }
