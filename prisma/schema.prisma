@@ -31,7 +31,6 @@ model User {
   last_name String @db.VarChar(50)
   email String @db.VarChar(100) @unique
   phone_number String? @db.VarChar(50)
-  address String? @db.VarChar(100)
   is_active Boolean @default(true)
   grade Grade?
   subjects Subject[]
@@ -81,7 +80,6 @@ model Student {
   last_name String @db.VarChar(50)
   email String @db.VarChar(100) @unique
   phone_number String? @db.VarChar(50)
-  address String? @db.VarChar(100)
   is_active Boolean @default(true)
   institution Institution @relation(fields: [institution_id], references: [id])
   institution_id Int
