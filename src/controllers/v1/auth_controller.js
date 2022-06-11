@@ -15,7 +15,7 @@ function googleLogin (req, res) {
 async function googleCallback (req, res) {
   try {
     const jwt = createJWT({ userId: req.user.id })
-    res.cookie('user_auth_token', jwt, createOptionsCookie(10))
+    res.cookie('user_auth_token', jwt, createOptionsCookie(120))
 
     return res.redirect(roleRedirectUrl(req.user.role))
   } catch (e) {
