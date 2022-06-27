@@ -59,6 +59,10 @@ const noticeUpdateData = {
   title: 'Notice updated'
 }
 
+const assignmentUpdateData = {
+  title: 'Update assignment'
+}
+
 const createTestData = async () => {
   const institution = await prisma.institution.create({
     data: institutionData
@@ -194,5 +198,6 @@ module.exports = {
   attendantData,
   assignmentHomeworkData,
   noticeData,
-  noticeUpdateData
+  noticeUpdateData,
+  assignmentUpdateData
 }

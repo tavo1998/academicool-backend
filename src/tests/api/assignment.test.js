@@ -2,7 +2,8 @@ const {
   api,
   createTestData,
   deleteTestData,
-  assignmentHomeworkData
+  assignmentHomeworkData,
+  assignmentUpdateData
 } = require('../test_data')
 const { server } = require('./../../index')
 const { createJWT } = require('./../../lib/jwt')
@@ -13,7 +14,7 @@ beforeAll(async () => {
   data = await createTestData()
 })
 
-describe('DELETE /api/v1/assignments/:noticeId', () => {
+describe('DELETE /api/v1/assignments/:assignmentId', () => {
   test('responds with unauthenticated user', async () => {
     const response = await api
       .delete(`/api/v1/assignments/${data.notice.id}`)
@@ -38,6 +39,31 @@ describe('DELETE /api/v1/assignments/:noticeId', () => {
         description,
         assignment_type: assignmentType
       })
+    )
+  })
+})
+
+describe('PUT /api/v1/assignments/:assignmentId', () => {
+  test('responds with unauthenticated user', async () => {
+    const response = await api
+      .put(`/api/v1/assignments/${data.notice.id}`)
+      .expect(401)
+      .expect('Content-Type', /json/)
+
+    expect(response.body).toEqual({ message: 'Unauthenticated user' })
+  })
+
+  test('responds with 200 assignment update successfully', async () => {
+    const token = createJWT({ userId: data.teacher.id })
+    const response = await api
+      .put(`/api/v1/assignments/${data.assignment.id}`)
+      .set('Cookie', `user_auth_token=${token}`)
+      .send(assignmentUpdateData)
+      .expect(200)
+      .expect('Content-Type', /json/)
+
+    expect(response.body.data).toEqual(
+      expect.objectContaining(assignmentUpdateData)
     )
   })
 })
