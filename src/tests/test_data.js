@@ -50,6 +50,15 @@ const assignmentHomeworkData = {
 
 }
 
+const noticeData = {
+  title: 'Test notice',
+  description: 'Test notice description'
+}
+
+const noticeUpdateData = {
+  title: 'Notice updated'
+}
+
 const createTestData = async () => {
   const institution = await prisma.institution.create({
     data: institutionData
@@ -130,17 +139,42 @@ const createTestData = async () => {
     }
   })
 
+  const assignment = await prisma.assigment.create({
+    data: {
+      ...assignmentHomeworkData,
+      subject: {
+        connect: {
+          id: subject.id
+        }
+      }
+    }
+  })
+
+  const notice = await prisma.notice.create({
+    data: {
+      ...noticeData,
+      subject: {
+        connect: {
+          id: subject.id
+        }
+      }
+    }
+  })
+
   return {
     institution,
     grade,
     teacher,
     subject,
-    student
+    student,
+    notice,
+    assignment
   }
 }
 
 const deleteTestData = async () => {
   await prisma.assigment.deleteMany({})
+  await prisma.notice.deleteMany({})
   await prisma.subject.deleteMany({})
   await prisma.student.deleteMany({})
   await prisma.user.deleteMany({})
@@ -158,5 +192,7 @@ module.exports = {
   subjectData,
   gradeData,
   attendantData,
-  assignmentHomeworkData
+  assignmentHomeworkData,
+  noticeData,
+  noticeUpdateData
 }
